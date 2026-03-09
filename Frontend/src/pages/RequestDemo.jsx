@@ -289,7 +289,7 @@ const RequestDemo = () => {
                                     <p style={{ fontSize: '15px', color: '#94a3b8', marginBottom: '40px' }}>In the meantime, explore our case studies and solution pages.</p>
                                     <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
                                         <Link to="/case-studies" style={{ background: '#1d63ed', color: 'white', padding: '14px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: '700', fontSize: '15px' }}>View Case Studies</Link>
-                                        <Link to="/products" style={{ background: '#f1f5f9', color: '#0f172a', padding: '14px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: '700', fontSize: '15px' }}>Explore VSDOX</Link>
+                                        <Link to="#" style={{ background: '#f1f5f9', color: '#0f172a', padding: '14px 28px', borderRadius: '10px', textDecoration: 'none', fontWeight: '700', fontSize: '15px' }}>Explore VSDOX</Link>
                                     </div>
                                 </div>
                             )}

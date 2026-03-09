@@ -85,10 +85,10 @@ const DigitizationServices = () => {
                     </p>
                     <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
                         <Link to="/contact" className="btn-primary" style={{ background: 'white', color: 'var(--primary)', padding: '16px 36px', fontSize: '16px', fontWeight: '800' }}>
-                           Talk to a Preservation Expert
+                            Talk to a Preservation Expert
                         </Link>
                         <Link to="/request-demo" className="btn-outline" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)', padding: '16px 36px', fontSize: '16px', fontWeight: '800' }}>
-                           Request Digitization Demo
+                            Request Digitization Demo
                         </Link>
                     </div>
                 </div>

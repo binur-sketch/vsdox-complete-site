@@ -94,7 +94,7 @@ const Home = () => {
             <section className="ai-capabilities-section section-padding reveal">
                 <div className="max-container">
                     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-                        <h2 style={{ fontWeight: '800', marginBottom: '20px', color: 'white' }}>AI-Powered Enterprise Content Management</h2>
+                        <h1 style={{ fontWeight: '800', marginBottom: '20px', color: 'white' }}>AI-Powered Enterprise Content Management</h1>
                         <p style={{ color: '#94a3b8', maxWidth: '800px', margin: '0 auto', fontSize: '18px' }}>
                             Leverage advanced AI capabilities within VSDOX to automate, classify, extract, and retrieve information with precision.
                         </p>
@@ -140,7 +140,7 @@ const Home = () => {
             <section className="hosting-section section-padding reveal" style={{ background: 'var(--section-alt)' }}>
                 <div className="max-container">
                     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-                        <h2 style={{ fontWeight: '800', marginBottom: '20px' }}>Flexible Hosting Infrastructure</h2>
+                        <h1 style={{ fontWeight: '800', marginBottom: '20px' }}>Flexible Hosting Infrastructure</h1>
                         <p style={{ color: 'var(--text-muted)', maxWidth: '900px', margin: '0 auto', fontSize: '18px', lineHeight: '1.6' }}>
                             VSDOX is designed for deployment flexibility, enabling organizations to choose the infrastructure model that aligns with their operational, compliance, and scalability requirements. Built on a high-availability, containerized, and modular architecture, VSDOX ensures performance, resilience, and seamless scalability across environments.
                         </p>
@@ -170,7 +170,7 @@ const Home = () => {
             <section className="security-section-enhanced section-padding reveal">
                 <div className="max-container">
                     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-                        <h2 style={{ fontWeight: '800', marginBottom: '20px' }}>Enterprise-Grade Security</h2>
+                        <h1 style={{ fontWeight: '800', marginBottom: '20px' }}>Enterprise-Grade Security</h1>
                         <p style={{ color: 'var(--text-muted)', maxWidth: '900px', margin: '0 auto', fontSize: '18px' }}>
                             VSDOX implements multi-layered security controls across application, network, and data layers to ensure confidentiality, integrity, availability, and regulatory compliance.
                         </p>
@@ -264,7 +264,7 @@ const Home = () => {
             <section className="content-lifecycle-section section-padding reveal">
                 <div className="max-container">
                     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-                        <h2 style={{ fontWeight: '800', marginBottom: '20px' }}>End-to-End Digital Content Transformation</h2>
+                        <h1 style={{ fontWeight: '800', marginBottom: '20px' }}>End-to-End Digital Content Transformation</h1>
                         <p style={{ color: 'var(--text-muted)', maxWidth: '1000px', margin: '0 auto', fontSize: '18px', lineHeight: '1.6' }}>
                             From physical file digitization to secure digital storage, VSDOX manages the complete content journey—capturing, structuring, routing through intelligent workflows, and enabling secure search and retrieval within a controlled environment.
                         </p>
@@ -458,7 +458,7 @@ const Home = () => {
                     <div className="trust-header-premium">
                         <div className="trust-title-area">
                             <div className="info-tag">Industry Validation</div>
-                            <h2 style={{ fontSize: '40px', fontWeight: '800', margin: '20px 0' }}>Trusted Recognition</h2>
+                            <h1 style={{ fontSize: '40px', fontWeight: '800', margin: '20px 0' }}>Trusted Recognition</h1>
                             <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px' }}>
                                 VSDOX is recognized for its commitment to quality and operational excellence through international certifications and maturity standards.
                             </p>
@@ -512,7 +512,7 @@ const Home = () => {
             <section className="verticals-section section-padding reveal">
                 <div className="max-container">
                     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-                        <h2 style={{ fontWeight: '800' }}>ECM Solutions for Verticals</h2>
+                        <h1 style={{ fontWeight: '800' }}>ECM Solutions for Verticals</h1>
                         <p style={{ color: 'var(--text-muted)' }}>Tailored implementations for high-compliance sectors</p>
                     </div>
 
@@ -580,7 +580,7 @@ const Home = () => {
             <section className="why-vir-softech-section section-padding reveal">
                 <div className="max-container">
                     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-                        <h2 style={{ fontWeight: '800' }}>Why Vir Softech</h2>
+                        <h1 style={{ fontWeight: '800' }}>Why Vir Softech</h1>
                         <p style={{ color: 'var(--text-muted)' }}>Vir Softech is a Registered Service Provider of DSpace, ensuring certified expertise, reliable customization, and professional support for enterprise-grade DMS solutions.</p>
                     </div>
                     <div className="why-vir-grid">

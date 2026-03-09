@@ -69,7 +69,7 @@ const ClientLogos = () => {
             <div className="max-container">
                 <div className="clientele-header">
                     <span className="info-tag" style={{ margin: '0 auto 16px', display: 'inline-block' }}>Our Trusted Network</span>
-                    <h2>Elite Client Roster</h2>
+                    <h1>Elite Client Roster</h1>
                     <p>Powering documentation for world-class government bodies, healthcare institutions, and enterprise leaders across the globe.</p>
                 </div>
 
