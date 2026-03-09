@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="img/favicon.png" type="image/gif" sizes="16x16">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom_style.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- <link rel="stylesheet" href="slick/slick.css">
+    <link rel="stylesheet" href="slick/slick-theme.css"> -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="js/jquery-3.5.0.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js"></script>
+    <title>Vir Softech</title>
+  </head>
+  <body>
+    <header>
+	<nav class="nav_container" id="top_menu">
+		<div class="wrapper_box">
+			<div class="logo_box">
+				<a href="index.php">
+					<h2 class="logo_text"><img src="img/logo.png?v=1" alt="logo"></h2>
+				</a>
+			</div>
+			<div class="menu_box">
+				<ul class="menu_ul">
+					<li><a href="/">Home</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" href="#" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solutions</a>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+							<ul>
+								<li><a class="dropdown-item" href="ecm.php">Enterprise Content Management</a></li>
+								<li><a class="dropdown-item" href="eval-solution.php">Eval Educational Solution Suite</a>
+									<ul class="sub-menu">
+										<li><a class="dropdown-item" href="https://evalexam.com" target="_blank">EVAL EXAMS</a></li>
+<li><a class="dropdown-item" href="eval-omr.php">OMR Exam Software</a></li>
+										<li><a class="dropdown-item" href="computer-based-test.php">Computer Based Test Platform</a></li>
+										<li><a class="dropdown-item" href="lms.php">Learning Management Solution</a></li>
+										<li><a class="dropdown-item" href="question-and-test.php">Question & Test Management Bank</a></li>
+										<li><a class="dropdown-item" href="osm.php">On-Screen Marking Platform</a></li>
+									</ul>
+								</li>
+								<li><a class="dropdown-item" href="product-engineering-services.php">Print Product Engineering</a></li>
+								<li><a class="dropdown-item" href="product-engineering-services.php#customm_services">Custom Product Engineering</a></li>
+								<li><a class="dropdown-item" href="design-automation.php">Design and Artwork Automation</a></li>
+							</ul>
+						</div>
+					</li>
+					<!-- <li><a href="resources.php">Resources</a></li> -->
+					<li><a href="about-us.php">About</a></li>
+					<li><a href="contact-us.php">Contact</a></li>
+					<li><a href="careers.php">Careers</a></li>
+					<li><a href="blogs.php">Blogs</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<nav class="mobile_header">
+		<div class="mobile_header_container">
+			<div class="mobile_header_top">
+				<button class="mobile_menu_toggle" title="Open menu">
+					<img src="img/menu_toggle.svg" alt="menu-icon">
+				</button>
+				<a class="mobile_logo" href="/"><h2 class="logo_text"><img src="img/logo.png" alt="logo"></h2></a>
+			</div>
+		</div>
+	</nav>
+</header>
+<div id="mobile_menu_overlay"></div>
+<div class="mobile_menu_container">
+	<div class="mobile_menu_box">
+		<button class="close_mobile_menu" title="Close modal"><span class="close_menu_text"></span><svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-1 -1)" fill-rule="evenodd"><rect transform="rotate(45 7 7)" x="-1" y="6" width="16" height="2" rx="1"></rect><rect transform="rotate(-45 7 7)" x="-1" y="6" width="16" height="2" rx="1"></rect></g></svg></button>
+		<div class="mobile_menu_content">
+			<ul>
+				<li class=""><a href="/">Home</a></li>
+				<li class="dropdown"><a class="dropdown-toggle" href="#" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solutions</a>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+						<ul>
+							<li><a class="dropdown-item" href="ecm.php">Enterprise Content Management</a></li>
+							<li><a class="dropdown-item" href="eval-solution.php">Eval Educational Solution Suite</a>
+								<ul>
+									<li><a class="dropdown-item" href="eval-omr.php">OMR Exam Software</a></li>
+									<li><a class="dropdown-item" href="computer-based-test.php">Computer Based Test Platform</a></li>
+									<li><a class="dropdown-item" href="lms.php">Learning Management Solution</a></li>
+									<li><a class="dropdown-item" href="question-and-test.php">Question & Test Management Bank</a></li>
+									<li><a class="dropdown-item" href="osm.php">On-Screen Marking Platform</a></li>
+								</ul>
+							</li>
+							<li><a class="dropdown-item" href="product-engineering-services.php">Print Product Engineering</a></li>
+							<li><a class="dropdown-item" href="product-engineering-services.php">Custom Product Engineering</a></li>
+							<li><a class="dropdown-item" href="design-automation.php">Design and Artwork Automation</a></li>
+						</ul>
+					</div>
+				</li>
+				<!-- <li><a href="resources.php">Resources</a></li> -->
+				<li><a href="about-us.php">About</a></li>
+				<li><a href="contact-us.php">Contact</a></li>
+				<li><a href="careers.php">Careers</a></li>
+				<li><a href="blogs.php">Blogs</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+
+
+<script>
+$(window).on('scroll', function(e){ 
+    if( $(".dropdown-menu").hasClass('show')){
+      $(".dropdown-menu").removeClass('show'); 
+    }
+});
+</script>      <section class="banner_sec about_us_banner">
+        <div class="banner_slider_container">
+          <div class="banner_slider_box">
+            <div class="banner_slider_item">
+              <div class="banner_info_box">
+                <div class="banner_info_img">
+                  <img src="img/about_top_img.svg" alt="img">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="about_intro_sec paddingTB40">
+        <div class="container">
+          <div class="about_itro_container description">
+            <div class="site_header_box left_side_header">
+              <h2>About Us</h2>
+            </div>
+            <p>Vir Softech is at the forefront of the revolution in business-led IT process transformation. We assist our customers in realizing their vision and scaling up through workflow transformations that produce superior business results at the lowest possible cost and in the shortest amount of time.</p>
+            <p>Vir Softech is a tech leader in four domains that include enterprise content management & digital imaging, print technology based products & services, design & artwork process automation and EVAL - educational evaluation, assessments and, learning solutions.</p>
+            <p>We have revolutionized technology and built solutions for firms of all sizes including fortune 500 companies, banks, government departments, private sector, agencies, schools, universities and coaching institutions. Trust us to transform.</p>
+          </div>
+        </div>
+      </section>
+      <section class="about_growth_sec paddingTB40">
+        <div class="container">
+          <div class="about_growth_container description">
+            <div class="site_header_box left_side_header">
+              <h2>Industry and Growth</h2>
+            </div>
+            <p>Our products and services are solving critical problems across industries and verticals, such as Education, Government, Corporate, Automobile, BFSI, Health, and Print & Publishing. We are growing at a CAGR of 40% per annum. We have happy customers globally and have served across geographies including the US, UK, Japan, Asia, Australia, the Middle East, and India.</p>
+            <p>Our operations spread across our corporate office in New Delhi, India and international operations in Tokyo, Japan.</p>
+          </div>
+        </div>
+      </section>
+      <section class="leadership_atvir_sec paddingTB40">
+        <div class="container">
+          <div class="leadership_atvir_container">
+            <div class="site_header_box left_side_header">
+              <h2>Leadership at Vir Softech</h2>
+            </div>
+            <p class="description">A few passionate technologists behind world’s foremost enterprise Imaging and Print products formed Vir Softech in Nov 2015. With time the team has expanded to include brilliant product engineers, research scientists, programmers, workflow engineers, data scientists, marketing executives, and dev-ops experts.</p>
+            <div class="leadership_box_container">
+              <div class="leadership_box">
+                <div class="leadership_box_header">
+                  <div class="leadership_box_header_img">
+                    <img src="img/deepak_garg.jpg" alt="img">
+                  </div>
+                  <div class="leadership_box_header_content">
+                    <div class="leadership_box_header_content_top">
+                      <h3>Deepak Garg</h3>
+                      <div class="leadership_social_box">
+                        <a href="https://in.linkedin.com/in/deepak-garg-a1264b" class="leadership_social_icon leadership_linkdin"><i class="fa fa-linkedin"></i></a>
+                        <a href="mailto:deepak@virsoftech.com" class="leadership_social_icon leadership_msg"><i class="fa fa-envelope-o"></i></a>
+                      </div>
+                    </div>
+                    <div class="leadership_box_header_content_bottom">
+                      <h4>Managing Director</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="leadership_box_body">
+                  <p>A quintessentially gifted techno-businessman, Deepak has over 20 years of experience in growing products and dreams through product innovation, strategic planning, and customer acquisition. He has huge experience in the govt. and business IT solutions, serving clients globally, in the past for companies like HCL Technologies and Adobe Systems. Deepak is the mind behind our products and service offerings. As the Managing Director, he oversees the sales, business development, operations, and financial division.</p>
+                </div>
+              </div>
+              <div class="leadership_box leadership_box_dark">
+                <div class="leadership_box_header">
+                  <div class="leadership_box_header_img">
+                    <img src="img/abhijeet_pic.jpg" alt="img">
+                  </div>
+                  <div class="leadership_box_header_content">
+                    <div class="leadership_box_header_content_top">
+                      <h3>Abhijeet Jain</h3>
+                      <div class="leadership_social_box">
+                        <a href="https://in.linkedin.com/in/abhijeet-jain-59286a1a7" class="leadership_social_icon leadership_linkdin"><i class="fa fa-linkedin"></i></a>
+                        <a href="mailto:abhijeet@virsoftech.com" class="leadership_social_icon leadership_msg"><i class="fa fa-envelope-o"></i></a>
+                      </div>
+                    </div>
+                    <div class="leadership_box_header_content_bottom">
+                      <h4>Chief Technology Officer</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="leadership_box_body">
+                  <p>Abhijeet is a Computer Scientist, Entrepreneur, and Business Executive with a deep background in technology. He is a programming guru with over 20 years industry experience of leading R&D teams at global product companies. In the past, he's worked in Adobe Systems where he was the key solution architect for PDF centric products and services for Print & Publishing domain. He is a contributor to PDF ISO specifications. Abhijeet is still very hands on with coding and is chief architect for our print domain projects.</p>
+                </div>
+              </div>
+              <div class="leadership_box leadership_box_dark">
+                <div class="leadership_box_header">
+                  <div class="leadership_box_header_img">
+                    <img src="img/Pralay-photo.png" alt="img">
+                  </div>
+                  <div class="leadership_box_header_content">
+                    <div class="leadership_box_header_content_top">
+                      <h3>Pralaypati Ta</h3>
+                      <div class="leadership_social_box">
+                        <a href="https://in.linkedin.com/in/pralaypati" class="leadership_social_icon leadership_linkdin"><i class="fa fa-linkedin"></i></a>
+                        <a href="mailto:pralay@virsoftech.com" class="leadership_social_icon leadership_msg"><i class="fa fa-envelope-o"></i></a>
+                      </div>
+                    </div>
+                    <div class="leadership_box_header_content_bottom">
+                      <h4>Principal Architect</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="leadership_box_body">
+                  <p>Pralaypati is a coding geek. He has over 18
+                    years of tech leadership experience leading
+                    R&D teams at global Product companies, such
+                    as Samsung and Adobe Systems. Pralaypati is
+                    our solution architect for Cloud based
+                    solutions in DAM/CMS and Analytics
+                    technologies.</p>
+                </div>
+              </div>
+              <div class="leadership_box">
+                <div class="leadership_box_header">
+                  <div class="leadership_box_header_img">
+                    <img src="sameer_manuja.jpg" alt="img">
+                  </div>
+                  <div class="leadership_box_header_content">
+                    <div class="leadership_box_header_content_top">
+                      <h3>Sameer Manuja</h3>
+                      <div class="leadership_social_box">
+                        <a href="https://www.linkedin.com/in/sameer-manuja-4b3b021" class="leadership_social_icon leadership_linkdin"><i class="fa fa-linkedin"></i></a>
+                        <a href="mailto:sameer@virsoftech.com" class="leadership_social_icon leadership_msg"><i class="fa fa-envelope-o"></i></a>
+                      </div>
+                    </div>
+                    <div class="leadership_box_header_content_bottom">
+                      <h4>Principal Architect</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="leadership_box_body">
+                  <p>Sameer is our key solution architect for print and publishing technologies. He has over 20 years of industry experience in creating path-setting technologies for companies like Samsung and Adobe Systems. He has several US patents to his name.</p>
+                </div>
+              </div>
+              <div class="leadership_box ">
+                <div class="leadership_box_header">
+                  <div class="leadership_box_header_img">
+                    <img src="img/sugino.jpg" alt="img">
+                  </div>
+                  <div class="leadership_box_header_content">
+                    <div class="leadership_box_header_content_top">
+                      <h3>Akihide Sugino</h3>
+                      <div class="leadership_social_box">
+                        <a href="https://jp.linkedin.com/in/akihide-sugino-938526154" class="leadership_social_icon leadership_linkdin"><i class="fa fa-linkedin"></i></a>
+                        <a href="mailto:sugino@virsoftech.com" class="leadership_social_icon leadership_msg"><i class="fa fa-envelope-o"></i></a>
+                      </div>
+                    </div>
+                    <div class="leadership_box_header_content_bottom">
+                      <h4>Country Head, Japan</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="leadership_box_body mt-5">
+                  <p>Sugino is a seasoned industry veteran with over
+                      35 years of experience in Sales, Marketing, and
+                      License Compliance Service for top global
+                      firms such as Epson and Adobe, he has
+                      managed vendors, partnerships, product line
+                      development, and enterprise sales for print and publishing domain. Sugino
+                      oversees corporate management and sales at
+                      Vir Softech.</p>
+                </div>
+              </div>
+
+              <div class="leadership_box leadership_box_dark">
+                <div class="leadership_box_header">
+                  <div class="leadership_box_header_img">
+                    <img src="img/manu-photo.jpg?v=1" alt="img">
+                  </div>
+                  <div class="leadership_box_header_content">
+                    <div class="leadership_box_header_content_top">
+                      <h3>Manu Paliwal</h3>
+                      <div class="leadership_social_box">
+                        <a href="https://in.linkedin.com/in/manu-paliwal-a549a144" class="leadership_social_icon leadership_linkdin"><i class="fa fa-linkedin"></i></a>
+                        <a href="mailto:manu@virsoftech.com" class="leadership_social_icon leadership_msg"><i class="fa fa-envelope-o"></i></a>
+                      </div>
+                    </div>
+                    <div class="leadership_box_header_content_bottom">
+                      <h4>Vice President – Sales</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="leadership_box_body">
+                  <p style="line-height: 1.2;">Manu is driving the growth strategy for the business, delivering differentiated customer value, and expanding business reach with diversified digital solutions. He has over 25 years of experience in the Sales and marketing, strategic alliances and operations including supply chain management. He has delivered turnaround results in most challenging business situations, prior to his current role, Manu held several leadership roles with P&L responsibility with global companies including his role as President – Business Solutions for Sharp.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="view_more_box">
+            <span class="explore_btn get_in_touch_btn" onMouseOver="this.style.color='#5D3FAC'" onMouseOut="this.style.color='white'"><a href="contact-us.php">Get in Touch</a></span>
+          </div>
+        </div>
+      </section>
+      <section class="milestone_sec paddingTB40">
+        <div class="container">
+          <div class="milestone_container">
+            <div class="site_header_box left_side_header">
+              <h2>Milestone</h2>
+              <p>Our growth is an inspiring story. Check the key milestones in our evolution!</p>
+            </div>
+            <div class="milestone_box_container">
+              <div class="milestone_box milestone_y15">
+                <div class="milestone_img">
+                  <img src="img/year2015.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2015</h4>
+                  <p>Few friends with a brilliant career and complimentary skills in technology, engineering and business development join hands to conceive Vir Softech.</p>
+                </div>
+              </div>
+              <div class="milestone_box milestone_y16">
+                <div class="milestone_img">
+                  <img src="img/year2016.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2016</h4>
+                  <p>Our first product is live. We launch Eval OMR.</p>
+                </div>
+              </div>
+              <div class="milestone_box milestone_y17">
+                <div class="milestone_img">
+                  <img src="img/year2017.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2017</h4>
+                  <p>Recognized as a start-up company by Govt of India.</p>
+                </div>
+              </div>
+              <div class="milestone_box milestone_y17a">
+                <div class="milestone_img">
+                  <img src="img/year2017a.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2017</h4>
+                  <p>First large-scale, pan-India deployment. Ministry of Education, Govt of India deploys eVAL OMR in 700 districts across India</p>
+                </div>
+              </div>
+              <div class="milestone_box milestone_y19">
+                <div class="milestone_img">
+                  <img src="img/year2019.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2019</h4>
+                  <p>Signed contract with one of the largest private life insurance companies in India for open source DMS implementation.</p>
+                </div>
+              </div>
+              <div class="milestone_box milestone_y19a">
+                <div class="milestone_img">
+                  <img src="img/year2019a.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2019</h4>
+                  <p>Launched Eval CBT</p>
+                </div>
+              </div>
+              <div class="milestone_box milestone_y18">
+                <div class="milestone_img">
+                  <img src="img/year2018.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2018</h4>
+                  <p>A large Japanese Print OEM signs contract for development of their ver 1.0 print software development.</p>
+                </div>
+              </div>
+              <div class="milestone_box milestone_y18a">
+                <div class="milestone_img">
+                  <img src="img/year2018a.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2018</h4>
+                  <p>Top 20 Most Promising DMS by CIO Review</p>
+                </div>
+              </div>
+              <div class="milestone_box milestone_y20">
+                <div class="milestone_img">
+                  <img src="img/year2020.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2020</h4>
+                  <p>Signed contract with one of the largest automobile companies in India for open source DMS implementation</p>
+                </div>
+              </div>
+              <div class="milestone_box milestone_y20a">
+                <div class="milestone_img">
+                  <img src="img/year2020a.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2020</h4>
+                  <p>Successfully conducted online admission exam on eVAL CBT for one of the most prestegious medical colleges in India</p>
+                </div>
+              </div>
+              <div class="milestone_box milestone_y21">
+                <div class="milestone_img">
+                  <img src="img/year2021.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2021</h4>
+                  <p>Top 10 Most Promising ECM by CIO Review</p>
+                </div>
+              </div>
+              <div class="milestone_box milestone_y21a">
+                <div class="milestone_img">
+                  <img src="img/year2021a.svg" alt="img">
+                </div>
+                <div class="milestone_content">
+                  <h4 class="milestone_year">2021</h4>
+                  <p>Successfully developed print software products for a US customer and were released in Market</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="achievement_sec paddingTB40">
+        <div class="container">
+          <div class="achievement_container">
+            <div class="site_header_box">
+              <h2>Achievements Corner</h2>
+            </div>
+            <div class="achievement_box_container">
+              <div class="achievement_box">
+                <div class="achievement_img">
+                  <img src="img/achivement1.svg" alt="img">
+                </div>
+                <div class="achievement_content">
+                  <p>Selected by Delhi Government as Showcase Start-up for India International Trade Fair in Delhi Pavilion in 2016</p>
+                </div>
+              </div>
+              <div class="achievement_box">
+                <div class="achievement_img">
+                  <img src="img/achivement4.svg" alt="img">
+                </div>
+                <div class="achievement_content">
+                  <p>Top 20 Enterprise Content Management Solution providers in India by CIO India for the year 2018</p>
+                </div>
+              </div>
+              <div class="achievement_box">
+                <div class="achievement_img">
+                  <img src="img/achivement4.svg" alt="img">
+                </div>
+                <div class="achievement_content">
+                  <p>Partner - World Education Summit, Mumbai, 2018</p>
+                </div>
+              </div>
+              <div class="achievement_box">
+                <div class="achievement_img">
+                  <img src="img/achivement3.svg" alt="img">
+                </div>
+                <div class="achievement_content">
+                  <p>Top 20 Enterprise Content Management Solution providers in India by CIO India for the year 2019</p>
+                </div>
+              </div>
+              <div class="achievement_box">
+                <div class="achievement_img">
+                  <img src="img/achivement2.svg" alt="img">
+                </div>
+                <div class="achievement_content">
+                  <p>Top 20 Enterprise Content Management Solution providers in India by CIO India for the year 2021 & 2023<a href="https://www.cioinsiderindia.com/magazine/dms-solution-providers-july-2023/#page=28" target="_blank">  View Magazine</a></p>
+                </div>
+              </div>
+              <div class="achievement_box">
+                <div class="achievement_img">
+                  <img src="img/achivement3.svg" alt="img">
+                </div>
+                <div class="achievement_content">
+                  <p>Most promising Assessment Solution Provider of the Year 2021 - Ardorcomm Media</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>      <section class="book_demo_sec paddingTB60">
+        <div class="container">
+          <div class="site_header_box left_side_header">
+            <h2>Book A Demo Today</h2>
+          </div>
+          <div class="demo_action_box">
+            <p>Our introductory consultation call includes:</p>
+            <ul>
+              <li><img src="img/list_call_icon.svg" alt="img">A discussion to collect your key business requirements</li>
+              <li><img src="img/list_demo_icon.svg" alt="img">A demo of the product/solution by our Product Manager</li>
+              <li><img src="img/list_advice_icon.svg" alt="img">Advice on the next steps to get your project moving</li>
+            </ul>
+          </div>
+          <div class="book_demo_container">
+            <div class="book_demo_form_container">
+              <div class="demo_form_box">
+                <!DOCTYPE html>
+<html>
+  <head>
+     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script> -->
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+        </head>
+  <script type="text/javascript">
+  function callSweetMsg(){
+        swal({
+        title: "Error!",
+        text: "Here's my error message!",
+        type: "error",
+        confirmButtonText: "Cool"
+       });
+    }
+    </script>
+</html>
+                <form action="" method="POST" enctype="form-data/multipart">
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="text" minlength="" placeholder="Name" class="form-control" name="name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)"  required/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-3">
+                        <input type="text" placeholder="Code" class="form-control" name="code" onkeypress="return onlyNumberKey(event)" maxlength="4" required>
+                      </div>
+                      <div class="col-9">
+                        <input type="text" placeholder="Phone" class="form-control" name="phone" onkeypress="return onlyNumberKey(event)" 
+                   minlength="10" maxlength="10" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="email" placeholder="Email ID" class="form-control" name="email"  required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="text" placeholder="Organization" class="form-control" name="org" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="text" placeholder="Location" class="form-control" name="loc" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <textarea class="form-control" name="message" placeholder="Message" required></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="form-group col-6">
+                        <input type="text" class="form-control" placeholder="Enter captcha here" name="captcha" id="captcha" required>
+                      </div>
+                      <div class="form-group col-6">
+                          <img src="captcha.php" alt="PHP Captcha" style="width: 100%;height: 50px;border-radius: 0.25rem;">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <input type="submit" value="Submit" name="submit1" class="book_demo_form_submit">
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="book_demo_img_box">
+              <img src="img/book_demo_image.svg" alt="img">
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="main_footer paddingTB60">
+  <div class="container">
+    <div class="footer_top">
+      <div class="footer_top_container">
+        <div class="footer_top_box solutions_box">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="about-us.php">About</a></li>
+            <li><a href="contact-us.php">Contact</a></li>
+            <li><a href="blogs.php">Blogs</a></li>
+            <li><a href="careers.php">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer_top_box solutions_box">
+          <h3>Solutions</h3>
+          <ul>
+            <li><a href="ecm.php">Enterprise Content Management (ECM)</a></li>
+            <li><a href="eval-solution.php">EVAL Solution Suite</a></li>
+            <li><a href="computer-based-test.php">Computer Based Tests (CBT)</a></li>
+            <li><a href="eval-omr.php">Optical Mark Reader (OMR)</a></li>
+            <li><a href="lms.php">Learning Management System (LMS)</a></li>
+            <li><a href="question-and-test.php">Question & Test Bank (QTB)</a></li>
+            <li><a href="osm.php">Online Screen Marking (OSM)</a></li>
+            <li><a href="design-automation.php">Design Automation</a></li>
+            <li><a href="product-engineering-services.php">Product Engineering (Print)</a></li>
+          </ul>
+        </div>
+        <div class="footer_top_box contact_links_box">
+          <h3>Contact Us</h3>
+          <ul>
+            <li class="contact_email"><span class="contact_icon_box"><img src="img/email.svg" alt="icon"></span><span class="contact_content_box"><a href="mailto:corp@virsoftech.com">corp@virsoftech.com</a></span></li>
+            <li class="contact_call"><span class="contact_icon_box"><img src="img/phone-call.svg" alt="icon"></span><span class="contact_content_box"><a href="tel:+18005717711">18005717711</a></span></li>
+            <li class="contact_call"><span class="contact_icon_box"><img src="img/phone-call.svg" alt="icon"></span><span class="contact_content_box"><a href="tel:+01204325497">0120 - 4325 497</a></span></li>
+            <li class="contact_whatapp"><span class="contact_icon_box"><img src="img/whatsapp_call.svg" alt="icon"></span><span class="contact_content_box"><a href="https://wa.me/9319086751">9319086751</a></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer_top_container mt-5" style="justify-content: flex-end;display:none;">
+        <div class="footer_top_box contact_links_box" style="width:33%;">
+          <h3>USA Sales Office</h3>
+          <ul>
+            <li class="contact_email"><span class="contact_icon_box"><img src="img/email.svg" alt="icon"></span><span class="contact_content_box"><a href="mailto:aruna@virsoftech.com">aruna@virsoftech.com</a></span></li>
+            <li class="contact_call"><span class="contact_icon_box"><img src="img/phone-call.svg" alt="icon"></span><span class="contact_content_box"><a href="tel:+1 (408) 839-7063">+1 (408) 839-7063</a></span></li>
+          </ul>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="footer_bottom">
+      <div class="connect_box">
+        <h3>Connect With Us</h3>
+        <div class="social_box">
+          <ul>
+            <li><a href="https://in.linkedin.com/company/virsoftech"><img src="img/linkedin_circle.svg" alt="icon"></a></li>
+            <li><a href="https://www.facebook.com/virsoftech.official/"><img src="img/facebook_circle.svg" alt="icon"></a></li>
+            <li><a href="https://www.youtube.com/c/VirSoftech"><img src="img/you_tube_circle.svg" alt="icon"></a></li>
+            <li><a href="https://www.instagram.com/virsoftech/"><img src="img/instagram_cicle.svg" alt="icon"></a></li>
+            <li><a href="https://twitter.com/virsoftech"><img src="img/twitter_circle.svg" alt="icon"></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright_box">
+        <p>© Vir Softech Pvt Ltd | All Rights Reserved | 2022</p>
+      </div>
+    </div>
+  </div>
+</footer>      <!-- start Back To Top -->
+      <div id="back-to-top">
+        <a href="#"><i class="fa fa-chevron-up"></i></a>
+      </div>
+      <!-- end Back To Top -->
+  </div>
+    <!-- <script src="slick/slick.min.js"></script> -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script type="text/javascript">
+    function onlyNumberKey(evt) {          
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+    </script>
+  </body>
+</html>
