@@ -46,11 +46,32 @@ const caseStudies = [
         client: 'Multiple State and District Courts',
         logo: 'fa-scale-balanced',
         title: 'Paperless E-Court Solution',
-        challenge: 'Ensuring robust protection against sensitive data breaches while training judges and staff to transition from millions of physical files to a digital system without workflow disruption.',
-        solution: 'Custom judicial ECM with advanced search, automated cause-list generation, and secure workflows for document submission, approval, and archiving.',
-        results: ['Instant remote access for judges', '95% reduction in physical file clutter', 'Automated case tracking & scheduling', 'Robust protection against unauthorized access'],
+        challenge: 'Heavy dependence on physical case files causing delays during hearings. Difficulty in quickly retrieving documents from large paper records. Judges and advocates spend significant time searching through bulky files. Limited ability to highlight, annotate, or mark important evidence during hearings. Storage challenges due to massive accumulation of physical court records. Lack of instant access to case files linked with the daily cause list. Manual processes for document review and hearing documentation. Limited use of modern digital tools like tablets and stylus-based annotations.',
+        solution: 'Highly customized Paperless e-Court platform designed specifically for judicial workflows. Developed after extensive discussions with Honourable Judges and court officials to address real courtroom challenges. Seamless integration with Court CIS through APIs to automatically fetch daily cause lists. Deep integration with Document Management System (DMS) to retrieve complete case files. Advanced embedded PDF viewer for viewing and reviewing digital case files. Supports annotations such as highlight, underline, strikethrough, comments, and shapes in multiple colors. Integrated digital whiteboard for marking observations and explanations during hearings. Compatible with Wacom devices, tablets, and stylus inputs for natural handwriting on documents. Responsive interface that works across desktops, tablets, and courtroom display screens. Supports real-time recording of hearings and evidences for accurate documentation.',
+        results: ['Instant access to digital case files during hearings', 'Faster case review and improved judicial efficiency', 'Significant reduction in paper usage and physical file handling', 'Judges can annotate and highlight evidence directly on documents', 'Better case preparation for judges and advocates', 'Secure and organized digital storage of court documents', 'Improved transparency and documentation of hearings', 'Enables a modern, technology-driven courtroom environment.'],
         industry: 'Judiciary',
-        tech: 'Java, React JS, PostgreSQL'
+        tech: 'Java 17, Springboot, Hibernate, React, PostgreSQL'
+    },
+    {
+        tag: 'CORPORATE',
+        tagColor: '#0ea5e9',
+        client: 'HDFC Life Insurance',
+        logo: 'fa-building-columns',
+        title: 'Enterprise Document Management & Repository Modernization',
+        challenge: 'The organization relied on IBM FileNet as its ECM/DMS platform for over a decade, resulting in high licensing costs and complex system architecture. Large volumes of policy documents, images, and customer records exceeding 100 TB created challenges in storage, retrieval, and system performance. The platform supported critical operations such as policy creation and servicing, where any downtime could directly impact customer experience and revenue. The customer required a scalable, high-performance, and cloud-ready document repository capable of handling millions of documents securely while ensuring fast access for internal teams and agents.',
+        solution: 'Implemented a scalable open-source Enterprise Content Management platform based on DSpace to replace the legacy FileNet system. Developed high-performance REST APIs to integrate with multiple front-end policy management applications. Enabled secure LDAP-based authentication and centralized access control. Built an advanced document viewer supporting images, PDFs, audio, and video files with features such as zoom, rotate, search, highlighting, and thumbnails. Designed a cloud-native architecture on AWS using Amazon S3 for document storage, Aurora PostgreSQL for metadata management, and Elasticsearch for fast document indexing and search. Conducted multiple VAPT security assessments to ensure enterprise-grade security and reliability.',
+        results: [
+            'Successfully migrated over 100 TB of legacy documents from IBM FileNet to the new DMS',
+            'Significant reduction in licensing and maintenance costs using open-source ECM',
+            'High-performance system with average API response time around 300 ms',
+            'Handles more than 1,300 requests per minute during peak usage',
+            'Supports processing of up to 20 lakh documents per day',
+            'Achieved enterprise-grade reliability with approximately 99.9% uptime',
+            'Scalable repository managing more than 200+ crore documents securely',
+            'Improved policy servicing and faster document retrieval for agents and internal teams'
+        ],
+        industry: 'Corporate',
+        tech: 'Java, REST APIs, DSpace, AWS S3, AWS RDS Aurora PostgreSQL, Elasticsearch, LDAP'
     },
     {
         tag: 'EDUCATION',
@@ -127,7 +148,7 @@ const caseStudies = [
         tagColor: '#0f766e',
         client: 'Hero MotoCorp Ltd.',
         logo: 'fa-motorcycle',
-        title: 'All-Department ECM for Two-Wheeler Leader',
+        title: 'Enterprise ECM for Two-Wheeler Leader',
         challenge: 'Inefficient manual document management, lack of system integration, difficulty in compliance tracking, inconsistent metadata, fragmented departmental systems, and high volume of paper records spread across multiple departments.',
         solution: 'Open-source VsDox DMS deployed across all departments — HR (500K records + SAP/Google Enterprise integration), CAD (300K pages), Plant Maintenance (250K pages + GSS + mobile app), Secretariat (drag-and-drop + audit logs), Corporate (dynamic watermarking), and Strategic Sourcing (configurable workflows).',
         results: [

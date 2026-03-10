@@ -194,7 +194,7 @@ const Home = () => {
                         <div className="security-item">
                             <div className="security-item-icon"><i className="fas fa-lock"></i></div>
                             <div className="security-item-content">
-                                <h4>AES-256 & Encryption at Rest</h4>
+                                <h4>AES-256 bit Encryption</h4>
                                 <p>Secures all stored data using AES-256 encryption, ensuring that even if storage assets are accessed directly, the data remains unreadable without authorized VSDOX access and decryption controls.</p>
                             </div>
                         </div>
@@ -276,7 +276,7 @@ const Home = () => {
                             <div className="info-tag">Digital Ingestion</div>
                             <h3 style={{ fontSize: '32px', fontWeight: '800', margin: '15px 0' }}>Capture Solution</h3>
                             <p style={{ fontSize: '16px', color: 'var(--text-main)', marginBottom: '24px' }}>
-                                A Capture Solution is specialized software designed to manage and monitor the complete workflow of document digitization—from physical file receipt to secure repository upload—ensuring traceability, accountability, and quality control at every stage.
+                                Capture Solution is specialized software designed to manage and monitor the complete workflow of document digitization—from physical file receipt to secure repository upload—ensuring traceability, accountability, and quality control at every stage.
                             </p>
                         </div>
                         <div className="capture-workflow-grid">
@@ -303,7 +303,7 @@ const Home = () => {
                             ))}
                         </div>
                         <p style={{ marginTop: '30px', padding: '20px', background: '#f8fafc', borderRadius: '12px', fontSize: '14px', fontStyle: 'italic', borderLeft: '4px solid var(--primary)' }}>
-                            The Capture Solution enforces process transparency, ensures data integrity, and provides real-time visibility into digitization progress and productivity metrics.
+                            The Capture Solution enforces process transparency, ensures data integrity, and provides dashboards to give real-time visibility into digitization progress and productivity metrics.
                         </p>
                     </div>
 
@@ -403,41 +403,14 @@ const Home = () => {
                     <div className="headless-container">
                         <div className="headless-content">
                             <div className="info-tag">REST API–Based Architecture</div>
-                            <h2 style={{ fontSize: '32px', fontWeight: '800', margin: '15px 0' }}>Headless DMS (REST API–Based Architecture)</h2>
+                            <h2 style={{ fontSize: '32px', fontWeight: '800', margin: '15px 0' }}>Headless DMS</h2>
                             <p style={{ fontSize: '18px', color: 'var(--text-main)', marginBottom: '24px' }}>
                                 A Headless DMS is a REST API–driven document management solution where all document storage, metadata, security, and workflows are managed in the backend through an Admin Panel.
                             </p>
                             <p style={{ fontSize: '16px', color: 'var(--text-muted)', marginBottom: '24px' }}>
                                 Documents are stored and controlled centrally in the DMS, while customers use their own custom front-end (web portal, mobile app, ERP, etc.) to fetch and display document data via secure APIs. This approach provides full UI flexibility while keeping document governance, access control, and compliance centralized in the backend system.
                             </p>
-
-                            <div className="headless-comparison">
-                                <div className="comp-item">
-                                    <strong>Traditional DMS</strong>
-                                    <span>Backend + Fixed UI</span>
-                                </div>
-                                <div className="comp-arrow"><i className="fas fa-arrow-right-long"></i></div>
-                                <div className="comp-item highlight">
-                                    <strong>Headless DMS</strong>
-                                    <span>Backend Only (Build Your Own UI)</span>
-                                </div>
-                            </div>
-
-                            <div className="headless-benefits-grid">
-                                <div className="benefit-pill"><i className="fas fa-palette"></i> Full Front-end Customization</div>
-                                <div className="benefit-pill"><i className="fas fa-plug-circle-bolt"></i> Easy Integration</div>
-                            </div>
-
-                            <div className="headless-proof">
-                                <p>Delivered Headless DMS solution to industry leaders:</p>
-                                <div className="proof-logos-inline">
-                                    <img src={abLogo} alt="Aditya Birla Group" className="headless-customer-logo" />
-                                    <img src={religareLogo} alt="Religare" className="headless-customer-logo" />
-                                    <img src={hdfcLogo} alt="HDFC" className="headless-customer-logo" />
-                                </div>
-                            </div>
                         </div>
-
                         <div className="headless-visual reveal" style={{ transitionDelay: '0.2s' }}>
                             <div className="headless-image-wrapper">
                                 <img src={headlessDms} alt="VSDOX Headless DMS Architecture" />
@@ -560,10 +533,10 @@ const Home = () => {
                         </div>
                         <div className="vertical-card">
                             <div className="vertical-icon"><i className="fas fa-graduation-cap"></i></div>
-                            <h3>Education</h3>
+                            <h3>Education/Institutions</h3>
                             <ul className="vertical-list">
                                 <li><strong>Libraries:</strong> Research, Journals, Archives, Subject Text Repositories</li>
-                                <li><strong>Institutions:</strong> Managing access to Repositories</li>
+                                <li><strong>Institutions:</strong> Digital institutional repository for the dissemination of institutional knowledge.</li>
                             </ul>
                         </div>
                     </div>
