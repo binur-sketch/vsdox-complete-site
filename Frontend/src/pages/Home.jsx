@@ -7,9 +7,9 @@ import heroVsdox from '../assets/hero-vsdox.png';
 import isoCert from '../assets/iso.jpg';
 import cmmiCert from '../assets/cmmi.jpg';
 import headlessDms from '../assets/headless DMS.png';
-import abLogo from '../assets/ABHFL_OG.png';
+import abLogo from '../assets/hdfcLife.png';
 import religareLogo from '../assets/Religare-Broking-Ltd..jpg';
-import hdfcLogo from '../assets/hdfclife.jpg';
+import heroMotologo from '../assets/Hero_MotoCorp-Logo.wine.svg'
 
 const Home = () => {
     useEffect(() => {

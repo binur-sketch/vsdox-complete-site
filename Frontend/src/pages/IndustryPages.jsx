@@ -152,7 +152,7 @@ export const BankingBFSI = () => {
                         { icon: 'fa-shield-halved', title: 'Regulatory Compliance', desc: 'Built-in audit trails, retention policies, and access controls aligned with RBI, SEBI, and IRDAI guidelines.' },
                         { icon: 'fa-address-card', title: 'KYC & Account Opening', desc: 'Digitize KYC, form handling, and new account onboarding with intelligent data extraction from IDs.' },
                         { icon: 'fa-file-contract', title: 'Insurance Policy Management', desc: 'Manage new policies, endorsements, claims documents, and service requests in one unified repository.' },
-                        { icon: 'fa-magnifying-glass-chart', title: 'Fraud Detection & Analytics', desc: 'AI-powered anomaly detection and document verification to prevent fraudulent claims and transactions.' },
+                        { icon: 'fa-magnifying-glass-chart', title: 'Headless DMS', desc: 'Documents are stored and controlled centrally in the DMS, while customers use their own custom front-end (web portal, mobile app, ERP, etc.) to fetch and display document data via secure APIs. ' },
                         { icon: 'fa-lock', title: 'AES-256 Encrypted Vault', desc: 'Bank-grade encryption, multi-factor authentication, and role-based data access for maximum security.' },
                     ]} />
                 </div>
@@ -165,7 +165,7 @@ export const BankingBFSI = () => {
                     { icon: 'fa-clock', title: 'Faster Customer Onboarding', desc: 'Reduce account opening time from days to hours with automated KYC and digital verification.' },
                     { icon: 'fa-circle-check', title: 'Zero Compliance Gaps', desc: 'Automated retention policies and regulatory reporting ensure zero audit findings.' },
                     { icon: 'fa-cloud', title: 'Cloud & On-Premise Flexibility', desc: 'Deploy on AWS, Azure, or on-premise to meet your data residency requirements.' },
-                    { icon: 'fa-arrows-rotate', title: 'Seamless Core Banking Integration', desc: 'Native connectors for Finacle, Temenos, SAP BFSI, and other core banking systems.' },
+                    { icon: 'fa-arrows-rotate', title: 'Seamless Core Banking Integration', desc: 'API connectors for SAP, SSO, AD,CRM, ERP, Tally, and other core processing systems.' },
                 ]}
             />
 
@@ -371,7 +371,7 @@ export const Education = () => {
                     <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: '800', marginBottom: '16px' }}>Trusted by India's Premier Institutions</h2>
                     <p style={{ color: 'var(--text-muted)', marginBottom: '48px', fontSize: '17px' }}>Including IIT Delhi, AIIMS New Delhi, and leading High Courts</p>
                     <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', flexWrap: 'wrap' }}>
-                        {['IIT Delhi', 'AIIMS New Delhi', 'National Archives', 'OCAC', 'IIC Delhi'].map((name, i) => (
+                        {['IIT Delhi', 'AIIMS New Delhi', 'National Archives', 'IIC Delhi'].map((name, i) => (
                             <div key={i} style={{ background: '#f8fafc', border: '1px solid var(--border)', borderRadius: '12px', padding: '16px 28px', fontWeight: '700', color: 'var(--text-dark)' }}>{name}</div>
                         ))}
                     </div>
@@ -487,7 +487,7 @@ export const Judiciary = () => {
                         { icon: 'fa-scale-balanced', title: 'Judgment & Order Repository', desc: 'Searchable database of judgments and orders with AI-powered semantic search and citation cross-linking.' },
                         { icon: 'fa-book', title: 'Legal Research & Discovery', desc: 'Advanced search capabilities to find precedents and relevant case law across multiple years and courts.' },
                         { icon: 'fa-user-lock', title: 'Audit Trail & Compliance', desc: 'Complete history of document access and modifications to ensure the integrity of judicial records.' },
-                        { icon: 'fa-network-wired', title: 'Integrated Court Ecosystem', desc: 'Connect with ICJS and other judicial data grids for seamless information exchange.' },
+                        //{ icon: 'fa-network-wired', title: 'Integrated Court Ecosystem', desc: 'Connect with ICJS and other judicial data grids for seamless information exchange.' },
                     ]} />
                 </div>
             </section>

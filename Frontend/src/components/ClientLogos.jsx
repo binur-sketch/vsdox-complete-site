@@ -1,5 +1,5 @@
 import React from 'react';
-import hdfcLife from '../assets/hdfclife.jpg';
+import hdfcLife from '../assets/hdfclife.png';
 import abHousing from '../assets/ABHFL_OG.png';
 import heroMoto from '../assets/Hero_MotoCorp-Logo.wine.svg';
 import religare from '../assets/Religare-Broking-Ltd..jpg';
@@ -19,8 +19,8 @@ import govPosts from '../assets/images (2).jpg';
 import andhraHC from '../assets/unnamed.png';
 import asiaticSociety from '../assets/logo6.jpg';
 import madrasHC from '../assets/High Court Madras.jpg';
-import odishaDC from '../assets/District Court Odisha.jpg';
-import deccanCollege from '../assets/Deccan college pune.png';
+import odishaDC from '../assets/District Court Odisha.png';
+import deccanCollege from '../assets/Deccan college pune.jpeg';
 import smsaExpress from '../assets/png-clipart-saudi-arabia-express-inc-smsa-express-air-waybill-retail-others-miscellaneous-purple.png';
 import ttdLogo from '../assets/TTD-Logo.png';
 import welhamGirls from '../assets/wgs-logo-final.png';
@@ -37,13 +37,13 @@ const baseClients = [
     { name: "Religare Broking Ltd.", logo: religare },
     { name: "Subros Ltd.", logo: subros },
     { name: "Rajasthan High Court", logo: rajasthanHC },
-    { name: "District Courts, Odisha", logo: odishaDC },
+    { name: "District Court, Odisha", logo: odishaDC },
     { name: "Bhubaneswar Development Authority (BDA)", logo: bda },
     { name: "Bhubaneswar Municipal Corporation", logo: bmc },
     { name: "Inspector General of Registration Revenue, Odisha", logo: registrationOdisha },
-    { name: "Allahabad District Courts, Prayagraj", logo: allahabadHC },
-    { name: "Telangana District Courts", logo: dcTelangana },
-    { name: "Andhra Pradesh High Courts", logo: andhraHC },
+    { name: "Allahabad District Court, Prayagraj", logo: allahabadHC },
+    { name: "Telangana District Court", logo: dcTelangana },
+    { name: "Andhra Pradesh High Court", logo: andhraHC },
     { name: "Madras High Court, Chennai", logo: madrasHC },
     { name: "Indian Institute Of Technology Delhi (IIT Delhi)", logo: iitDelhi },
     { name: "CSK Agricultural University, Palampur", logo: cskAgri },

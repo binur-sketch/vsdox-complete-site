@@ -116,15 +116,16 @@ const caseStudies = [
         logo: 'fa-building-columns',
         title: 'Enterprise DMS for a Global Conglomerate',
         challenge: 'Fragmented document handling across ABHFL, ABFL, and ABCDL subsidiaries resulted in critical retrieval delays, high licensing costs, limited security, and poor version control across 36+ countries.',
-        solution: 'VSDOX DMS deployed across three subsidiaries — ABHFL for automated loan-journey capture & DSA indexing, ABFL for time-bound distributor document management, and ABCDL for integrated DSA journey storage & retrieval on AWS.',
+        solution: 'VSDOX DMS deployed across three subsidiaries — ABHFL for automated loan-journey capture & DSA indexing, ABFL for time-bound distributor document management, and ABCDL for integrated DSA journey storage & retrieval on AWS/GCP.',
         results: [
-            'Automated capture & indexing sped up document retrieval',
+            'Automated capture & indexing speed up document retrieval',
             'Reduced licensing costs with open-source VsDox DMS',
             'Enhanced batch barcoding improved document precision',
-            'Role-based access & compliance strengthened data protection'
+            'Role-based access & compliance strengthened data protection',
+            'Customized reporting as per business requirements'
         ],
         industry: 'Banking & Financial Services',
-        tech: 'AWS, Java, Elasticsearch, PostgreSQL'
+        tech: 'AWS, GCP, Java, Elasticsearch,Solr, PostgreSQL'
     },
     {
         tag: 'BFSI',
@@ -150,7 +151,7 @@ const caseStudies = [
         logo: 'fa-motorcycle',
         title: 'Enterprise ECM for Two-Wheeler Leader',
         challenge: 'Inefficient manual document management, lack of system integration, difficulty in compliance tracking, inconsistent metadata, fragmented departmental systems, and high volume of paper records spread across multiple departments.',
-        solution: 'Open-source VsDox DMS deployed across all departments — HR (500K records + SAP/Google Enterprise integration), CAD (300K pages), Plant Maintenance (250K pages + GSS + mobile app), Secretariat (drag-and-drop + audit logs), Corporate (dynamic watermarking), and Strategic Sourcing (configurable workflows).',
+        solution: 'Open-source VsDox DMS deployed across all departments — HR (500K records + SAP/Google Enterprise integration), CAD (300K pages), Plant Maintenance (250K pages), Secretariat (drag-and-drop + audit logs), Corporate (dynamic watermarking), and Strategic Sourcing (configurable workflows).',
         results: [
             'Automated digitization & indexing reduced manual handling',
             'Advanced search enabled faster, reliable document retrieval',
@@ -398,7 +399,7 @@ export const ContactUs = () => {
                                 <h3 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '24px', color: 'var(--text-dark)' }}>Contact Information</h3>
                                 {[
                                     { icon: 'fa-location-dot', color: '#dc2626', title: 'Corporate Office (HQ)', lines: ['Vir Softech Pvt. Ltd.', 'A 306, The I Thum, Plot No. A 40,', 'Sector 62, Noida, UP – 201301, India'] },
-                                    { icon: 'fa-globe', color: '#6366f1', title: 'International Presence', lines: ['Japan: West Bldg. 302, 3-26-8 Takaido Higashi, Suginami-ku, Tokyo', 'USA: Silicon Valley, California'] },
+                                    { icon: 'fa-globe', color: '#6366f1', title: 'International Presence', lines: ['Japan: West Bldg. 302, 3-26-8 Takaido Higashi, Suginami-ku, Tokyo'] },
                                     { icon: 'fa-phone', color: '#16a34a', title: 'Call Us', lines: ['18005717711 (Toll-Free)', '0120 - 4325 497 (Landline)'] },
                                     { icon: 'fa-whatsapp', color: '#25d366', title: 'WhatsApp', lines: ['9319086751'] },
                                     { icon: 'fa-envelope', color: '#1877f2', title: 'Email', lines: ['corp@virsoftech.com', 'support@virsoftech.com'] },
