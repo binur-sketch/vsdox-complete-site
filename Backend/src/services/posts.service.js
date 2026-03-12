@@ -315,6 +315,7 @@ export const createPost = async (payload, authorId) => {
 
     return { id: rows[0].id, slug: rows[0].slug, status: rows[0].status };
   } catch (err) {
+    console.error('CRITICAL ERROR IN createPost:', err);
     await client.query('ROLLBACK');
     throw err instanceof ServiceError ? err : new ServiceError(err.message);
   } finally {
