@@ -27,12 +27,18 @@ import welhamGirls from '../assets/wgs-logo-final.png';
 import copycatKenya from '../assets/copycat logo.png';
 import registrationOdisha from '../assets/Odisha Dept.jpg';
 import allahabadHC from '../assets/District courts of Allahabad.png';
+import uti from '../assets/Union Trust of India.png';
+import lic from '../assets/Life Insurance Corporation.jpeg';
+import utkarsh from '../assets/Utkarsh Small Finance Bank.png';
 
 
 const baseClients = [
     { name: "HDFC Life Insurance Ltd.", logo: hdfcLife },
     { name: "HDFC Pension Fund Ltd.", logo: hdfcPension },
     { name: "Aditya Birla Housing Finance Limited", logo: abHousing },
+    { name: "Union Trust of India", logo: uti },
+    { name: "Life Insurance Corporation", logo: lic },
+    { name: "Utkarsh Small Finance Bank", logo: utkarsh },
     { name: "Hero MotoCorp Ltd.", logo: heroMoto },
     { name: "Religare Broking Ltd.", logo: religare },
     { name: "Subros Ltd.", logo: subros },
@@ -52,12 +58,11 @@ const baseClients = [
     { name: "India International Centre, Delhi", logo: iicDelhi },
     { name: "Indian Pharmacopoeia Commission", logo: pharmacopoeia },
     { name: "The Asiatic Society of Mumbai", logo: asiaticSociety },
-    { name: "SMSA Express, Dubai, UAE", logo: smsaExpress },
     { name: "Tirumala Tirupati Devasthanams (TTD)", logo: ttdLogo },
     { name: "Dept of Health & Family Welfare, Meghalaya", logo: meghalayaHealth },
     { name: "Welham Girls' School, Dehradun", logo: welhamGirls },
-    { name: "Department of Posts, Govt of India", logo: govPosts },
-    { name: "Copycat Ltd, Kenya", logo: copycatKenya }
+    { name: "Department of Posts, Govt of India", logo: govPosts }
+
 ];
 
 // Use exactly 30 items for the grid

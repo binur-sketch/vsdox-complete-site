@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { handleFormSubmission } from '../utils/formHandler';
+import { APP_CONTACT, DEFAULTS, LINKS } from '../config/appConstants';
 
 
 const RequestDemo = () => {
@@ -32,7 +33,7 @@ const RequestDemo = () => {
         setSending(true);
         setError(false);
 
-        const success = await handleFormSubmission(form, 'corp@virsoftech.com');
+        const success = await handleFormSubmission(form, DEFAULTS.recipientEmail);
 
         if (success) {
             setSubmitted(true);
@@ -78,10 +79,11 @@ const RequestDemo = () => {
     return (
         <main>
             {/* Hero */}
-            <section className="section-padding" style={{
-                backgroundImage: 'linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(29,99,237,0.85) 100%), url("https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2340&auto=format&fit=crop")',
+            <section style={{
+                backgroundImage: `linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(29,99,237,0.85) 100%), url("${DEFAULTS.requestDemoHeroImage}")`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
+                padding: '160px 0 100px',
                 marginTop: '80px',
                 textAlign: 'center',
             }}>
@@ -90,17 +92,17 @@ const RequestDemo = () => {
                         <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#60a5fa', display: 'inline-block', animation: 'pulse 2s infinite' }}></span>
                         <span style={{ color: '#60a5fa', fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Live Demo Available</span>
                     </div>
-                    <h1 style={{ fontSize: 'clamp(32px, 8vw, 56px)', fontWeight: '900', color: 'white', marginBottom: '20px', letterSpacing: '-0.02em', lineHeight: '1.1' }}>
+                    <h1 style={{ fontSize: '56px', fontWeight: '900', color: 'white', marginBottom: '20px', letterSpacing: '-0.02em', lineHeight: '1.1' }}>
                         See VSDOX in Action
                     </h1>
-                    <p style={{ fontSize: 'clamp(16px, 4vw, 20px)', color: 'rgba(255,255,255,0.85)', maxWidth: '680px', margin: '0 auto 40px', lineHeight: '1.7' }}>
+                    <p style={{ fontSize: '20px', color: 'rgba(255,255,255,0.85)', maxWidth: '680px', margin: '0 auto 40px', lineHeight: '1.7' }}>
                         Get a personalized, live walkthrough of our AI-powered Enterprise Content Management platform — tailored to your industry and use case.
                     </p>
                     {/* Stats */}
-                    <div className="stats-grid-inline" style={{ justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '48px', flexWrap: 'wrap' }}>
                         {trustStats.map((s, i) => (
                             <div key={i} style={{ textAlign: 'center' }}>
-                                <div style={{ fontSize: 'clamp(28px, 5vw, 36px)', fontWeight: '900', color: '#60a5fa' }}>{s.number}</div>
+                                <div style={{ fontSize: '36px', fontWeight: '900', color: '#60a5fa' }}>{s.number}</div>
                                 <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{s.label}</div>
                             </div>
                         ))}
@@ -109,9 +111,9 @@ const RequestDemo = () => {
             </section>
 
             {/* Main Content — split layout */}
-            <section className="section-padding" style={{ background: '#f8fafc' }}>
+            <section style={{ background: '#f8fafc', padding: '80px 0' }}>
                 <div className="max-container">
-                    <div className="two-col-grid" style={{ alignItems: 'start' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '60px', alignItems: 'start' }}>
 
                         {/* Left — Info Panel */}
                         <div>
@@ -141,17 +143,17 @@ const RequestDemo = () => {
                             <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', borderRadius: '20px', padding: '32px', color: 'white' }}>
                                 <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '16px' }}>Prefer to Talk Directly?</h4>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                                    <a href="mailto:corp@virsoftech.com" style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#60a5fa', textDecoration: 'none', fontSize: '15px', fontWeight: '600' }}>
+                                    <a href={LINKS.mailToRecipient} style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#60a5fa', textDecoration: 'none', fontSize: '15px', fontWeight: '600' }}>
                                         <i className="fas fa-envelope" style={{ width: '20px' }}></i>
-                                        corp@virsoftech.com
+                                        {APP_CONTACT.recipientEmail}
                                     </a>
-                                    <a href="tel:18005717711" style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#60a5fa', textDecoration: 'none', fontSize: '15px', fontWeight: '600' }}>
+                                    <a href={LINKS.telTollFree} style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#60a5fa', textDecoration: 'none', fontSize: '15px', fontWeight: '600' }}>
                                         <i className="fas fa-phone" style={{ width: '20px' }}></i>
-                                        1800-571-7711 (Toll Free)
+                                        {APP_CONTACT.tollFree} (Toll Free)
                                     </a>
-                                    <a href="https://wa.me/919319086751" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#25D366', textDecoration: 'none', fontSize: '15px', fontWeight: '600' }}>
+                                    <a href={LINKS.whatsapp} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#25D366', textDecoration: 'none', fontSize: '15px', fontWeight: '600' }}>
                                         <i className="fab fa-whatsapp" style={{ width: '20px' }}></i>
-                                        WhatsApp: +91 9319086751
+                                        WhatsApp: +{APP_CONTACT.whatsappCountryCode} {APP_CONTACT.whatsapp}
                                     </a>
                                 </div>
                                 <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', gap: '12px' }}>
@@ -161,23 +163,24 @@ const RequestDemo = () => {
                             </div>
                         </div>
 
+                        {/* Right — Form */}
                         <div>
                             {!submitted ? (
-                                <div style={{ background: 'white', borderRadius: '24px', padding: 'clamp(24px, 5vw, 48px)', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', border: '1px solid #e2e8f0' }}>
+                                <div style={{ background: 'white', borderRadius: '24px', padding: '48px', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', border: '1px solid #e2e8f0' }}>
                                     <h3 style={{ fontSize: '28px', fontWeight: '900', color: '#0f172a', marginBottom: '8px' }}>Book Your Free Demo</h3>
                                     <p style={{ fontSize: '15px', color: '#94a3b8', marginBottom: '32px' }}>Fill in your details and our team will reach out within 24 hours.</p>
 
                                     {error && (
                                         <div style={{ background: '#fef2f2', border: '1px solid #fecaca', color: '#991b1b', padding: '12px 16px', borderRadius: '8px', marginBottom: '24px', fontSize: '14px' }}>
                                             <i className="fas fa-exclamation-circle" style={{ marginRight: '8px' }}></i>
-                                            Oops! Something went wrong. Please try again or email us directly at corp@virsoftech.com.
+                                            Oops! Something went wrong. Please try again or email us directly at {APP_CONTACT.recipientEmail}.
                                         </div>
                                     )}
 
 
-                                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                                         {/* Name row */}
-                                        <div className="two-col-grid" style={{ gap: '16px' }}>
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                                             <div>
                                                 <label style={labelStyle}>First Name *</label>
                                                 <input name="firstName" value={form.firstName} onChange={handleChange} required style={inputStyle} placeholder="Rajesh" />
@@ -189,7 +192,7 @@ const RequestDemo = () => {
                                         </div>
 
                                         {/* Email & Phone */}
-                                        <div className="two-col-grid" style={{ gap: '16px' }}>
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                                             <div>
                                                 <label style={labelStyle}>Work Email *</label>
                                                 <input name="email" type="email" value={form.email} onChange={handleChange} required style={inputStyle} placeholder="rajesh@company.com" />
@@ -201,7 +204,7 @@ const RequestDemo = () => {
                                         </div>
 
                                         {/* Org & Designation */}
-                                        <div className="two-col-grid" style={{ gap: '16px' }}>
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                                             <div>
                                                 <label style={labelStyle}>Organization *</label>
                                                 <input name="organization" value={form.organization} onChange={handleChange} required style={inputStyle} placeholder="Organization name" />
@@ -213,7 +216,7 @@ const RequestDemo = () => {
                                         </div>
 
                                         {/* Industry & Employees */}
-                                        <div className="two-col-grid" style={{ gap: '16px' }}>
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                                             <div>
                                                 <label style={labelStyle}>Industry *</label>
                                                 <select name="industry" value={form.industry} onChange={handleChange} required style={inputStyle}>

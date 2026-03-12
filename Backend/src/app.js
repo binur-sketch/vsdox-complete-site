@@ -10,16 +10,15 @@ import postsRoutes    from './routes/posts.routes.js';
 import mediaRoutes    from './routes/media.routes.js';
 import taxonomyRoutes from './routes/categories.routes.js';
 import pool           from './db.js';
+import { corsOptions, appConfig } from './config/appConfig.js';
+import { startScheduler } from './services/scheduler.service.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
 const app = express();
 
-app.use(cors({
-  origin: [process.env.CLIENT_URL, 'http://localhost:3000', 'http://localhost:5173'],
-  credentials: true,
-}));
+app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -70,8 +69,9 @@ const runCleanup = async () => {
 };
 setInterval(runCleanup, 60 * 60 * 1000);
 runCleanup();
+startScheduler();
 
-const PORT = process.env.PORT || 5000;
+const PORT = appConfig.port;
 app.listen(PORT, () => {
   console.log(`VSDox Blog API running on port ${PORT}`);
   console.log(`Uploads served at: http://localhost:${PORT}/uploads/`);

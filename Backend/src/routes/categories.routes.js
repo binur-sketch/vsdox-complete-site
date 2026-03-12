@@ -8,11 +8,11 @@ import { protect, requireRole } from '../middleware/auth.middleware.js';
 const router = express.Router();
 
 router.get('/categories', getCategories);
-router.post('/categories', protect, createCategory);
+router.post('/categories', protect, requireRole('admin', 'editor'), createCategory);
 router.delete('/categories/:id', protect, requireRole('admin', 'editor'), deleteCategory);
 
 router.get('/tags', getTags);
-router.post('/tags', protect, createTag);
+router.post('/tags', protect, requireRole('admin', 'editor'), createTag);
 router.delete('/tags/:id', protect, requireRole('admin', 'editor'), deleteTag);
 
 export default router;

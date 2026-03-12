@@ -1,392 +1,1004 @@
 {
   "info": {
-    "name": "VSDox Blog API — Complete",
-    "description": "Full API collection. Run in order: Register/Login → Categories → Tags → Media → Posts. Tokens and IDs auto-save via test scripts.",
+    "name": "VSDox Blog API",
+    "description": "Complete API collection for the VSDox Blog backend. All protected routes require a Bearer token obtained from Login or Register.\n\nWorkflow:\n1. Run **Login** → token and session_token are auto-saved to collection variables\n2. All subsequent requests use {{token}} automatically\n3. When JWT expires, run **Refresh Token** to get a new one",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
-    { "key": "base_url",    "value": "http://localhost:5000/api", "type": "string" },
-    { "key": "token",       "value": "", "type": "string" },
-    { "key": "post_id",     "value": "", "type": "string" },
-    { "key": "post_slug",   "value": "", "type": "string" },
-    { "key": "category_id", "value": "", "type": "string" },
-    { "key": "tag_id",      "value": "", "type": "string" },
-    { "key": "media_id",    "value": "", "type": "string" }
+    { "key": "baseUrl",       "value": "http://localhost:5000/api", "type": "string" },
+    { "key": "token",         "value": "",  "type": "string" },
+    { "key": "sessionToken",  "value": "",  "type": "string" },
+    { "key": "postId",        "value": "1", "type": "string" },
+    { "key": "postSlug",      "value": "my-first-post", "type": "string" },
+    { "key": "categoryId",    "value": "1", "type": "string" },
+    { "key": "tagId",         "value": "1", "type": "string" },
+    { "key": "mediaId",       "value": "1", "type": "string" },
+    { "key": "resetToken",    "value": "",  "type": "string" }
   ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+  },
   "item": [
+
     {
-      "name": "01. Auth",
+      "name": "Auth",
+      "description": "Authentication, session management and account operations.",
       "item": [
+
         {
           "name": "Register",
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "const r = pm.response.json();",
-            "if (r.token) { pm.collectionVariables.set('token', r.token); }"
-          ]}}],
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  const d = pm.response.json();",
+                "  pm.collectionVariables.set('token', d.token);",
+                "  pm.collectionVariables.set('sessionToken', d.session_token);",
+                "  pm.test('Status 201', () => pm.response.to.have.status(201));",
+                "  pm.test('Has token', () => pm.expect(d.token).to.be.a('string'));",
+                "}"
+              ],
+              "type": "text/javascript"
+            }
+          }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Admin User\",\n  \"email\": \"admin@vsdox.com\",\n  \"password\": \"password123\",\n  \"role\": \"admin\"\n}" },
-            "url": { "raw": "{{base_url}}/auth/register", "host": ["{{base_url}}"], "path": ["auth", "register"] },
-            "description": "Register a new user.\n\nrole: admin | editor | author (default: author)\n\nResponse:\n{\n  \"token\": \"eyJ...\",\n  \"user\": { \"id\", \"name\", \"email\", \"role\", \"avatar_url\", \"bio\", \"created_at\" }\n}\n\nToken auto-saved."
-          }
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Admin User\",\n  \"email\": \"admin@vsdox.com\",\n  \"password\": \"Password123!\",\n  \"role\": \"admin\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth","register"] }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"session_token\": \"a1b2c3d4...\",\n  \"expires_at\": \"2024-01-01T01:00:00.000Z\",\n  \"idle_timeout\": 1800,\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Admin User\",\n    \"email\": \"admin@vsdox.com\",\n    \"role\": \"admin\",\n    \"avatar_url\": null,\n    \"bio\": null,\n    \"created_at\": \"2024-01-01T00:00:00.000Z\"\n  }\n}"
+            },
+            {
+              "name": "409 Email in use",
+              "status": "Conflict",
+              "code": 409,
+              "body": "{ \"error\": \"Email already in use\" }"
+            }
+          ]
         },
+
         {
           "name": "Login",
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "const r = pm.response.json();",
-            "if (r.token) { pm.collectionVariables.set('token', r.token); }"
-          ]}}],
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 200) {",
+                "  const d = pm.response.json();",
+                "  pm.collectionVariables.set('token', d.token);",
+                "  pm.collectionVariables.set('sessionToken', d.session_token);",
+                "  pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "  pm.test('Has JWT token', () => pm.expect(d.token).to.be.a('string'));",
+                "  pm.test('Has session token', () => pm.expect(d.session_token).to.be.a('string'));",
+                "  pm.test('Has user object', () => pm.expect(d.user).to.be.an('object'));",
+                "  pm.test('No password_hash in response', () => pm.expect(d.user).to.not.have.property('password_hash'));",
+                "}"
+              ],
+              "type": "text/javascript"
+            }
+          }],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@vsdox.com\",\n  \"password\": \"password123\"\n}" },
-            "url": { "raw": "{{base_url}}/auth/login", "host": ["{{base_url}}"], "path": ["auth", "login"] },
-            "description": "Login and receive JWT.\n\nResponse:\n{\n  \"token\": \"eyJ...\",\n  \"user\": { \"id\", \"name\", \"email\", \"role\", \"avatar_url\", \"bio\", \"created_at\", \"updated_at\" }\n}\n\nToken auto-saved."
-          }
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@vsdox.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth","login"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"session_token\": \"a1b2c3d4e5f6...\",\n  \"expires_at\": \"2024-01-01T01:00:00.000Z\",\n  \"idle_timeout\": 1800,\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Admin User\",\n    \"email\": \"admin@vsdox.com\",\n    \"role\": \"admin\"\n  }\n}"
+            },
+            {
+              "name": "401 Invalid credentials",
+              "status": "Unauthorized",
+              "code": 401,
+              "body": "{ \"error\": \"Invalid credentials\" }"
+            }
+          ]
         },
+
+        {
+          "name": "Refresh Token",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 200) {",
+                "  const d = pm.response.json();",
+                "  pm.collectionVariables.set('token', d.token);",
+                "  pm.test('New JWT received', () => pm.expect(d.token).to.be.a('string'));",
+                "}"
+              ],
+              "type": "text/javascript"
+            }
+          }],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"session_token\": \"{{sessionToken}}\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/refresh", "host": ["{{baseUrl}}"], "path": ["auth","refresh"] }
+          },
+          "response": [
+            {
+              "name": "200 OK — new JWT",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"idle_timeout\": 1800\n}"
+            },
+            {
+              "name": "401 Session expired",
+              "status": "Unauthorized",
+              "code": 401,
+              "body": "{ \"error\": \"Session expired. Please log in again.\", \"code\": \"SESSION_EXPIRED\" }"
+            },
+            {
+              "name": "401 Session idle",
+              "status": "Unauthorized",
+              "code": 401,
+              "body": "{ \"error\": \"Idle timeout (30 min). Please log in again.\", \"code\": \"SESSION_IDLE\" }"
+            },
+            {
+              "name": "401 Session not found",
+              "status": "Unauthorized",
+              "code": 401,
+              "body": "{ \"error\": \"Session not found. Please log in.\", \"code\": \"SESSION_NOT_FOUND\" }"
+            }
+          ]
+        },
+
         {
           "name": "Logout",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 200) {",
+                "  pm.collectionVariables.set('token', '');",
+                "  pm.collectionVariables.set('sessionToken', '');",
+                "  pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "}"
+              ],
+              "type": "text/javascript"
+            }
+          }],
           "request": {
             "method": "POST",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-            "body": { "mode": "raw", "raw": "" },
-            "url": { "raw": "{{base_url}}/auth/logout", "host": ["{{base_url}}"], "path": ["auth", "logout"] },
-            "description": "Blacklists the JWT server-side. No body required.\n\nAfter logout, same token returns:\n{ \"error\": \"Session expired. Please log in again.\", \"code\": \"TOKEN_REVOKED\" }\n\nResponse:\n{ \"message\": \"Logged out successfully\" }"
-          }
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/auth/logout", "host": ["{{baseUrl}}"], "path": ["auth","logout"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"message\": \"Logged out successfully\" }"
+            }
+          ]
         },
+
         {
           "name": "Get Me",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "pm.test('Has user', () => pm.expect(pm.response.json().user).to.be.an('object'));"
+              ],
+              "type": "text/javascript"
+            }
+          }],
           "request": {
             "method": "GET",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-            "url": { "raw": "{{base_url}}/auth/me", "host": ["{{base_url}}"], "path": ["auth", "me"] },
-            "description": "Returns full profile of logged-in user.\n\nResponse:\n{\n  \"user\": { \"id\", \"name\", \"email\", \"role\", \"avatar_url\", \"bio\", \"created_at\" }\n}\n\n401 codes: TOKEN_EXPIRED | TOKEN_REVOKED | INVALID_TOKEN | USER_NOT_FOUND"
-          }
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth","me"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Admin User\",\n    \"email\": \"admin@vsdox.com\",\n    \"role\": \"admin\",\n    \"avatar_url\": null,\n    \"bio\": null,\n    \"created_at\": \"2024-01-01T00:00:00.000Z\"\n  }\n}"
+            }
+          ]
         },
+
         {
           "name": "Update Profile",
           "request": {
             "method": "PUT",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{token}}" }
-            ],
-            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Updated Name\",\n  \"bio\": \"Enterprise document management expert at VSDox.\",\n  \"avatar_url\": \"https://example.com/avatar.jpg\"\n}" },
-            "url": { "raw": "{{base_url}}/auth/profile", "host": ["{{base_url}}"], "path": ["auth", "profile"] },
-            "description": "Update name, bio, avatar_url. All fields optional — only provided fields are updated.\n\nResponse:\n{\n  \"user\": { \"id\", \"name\", \"email\", \"role\", \"avatar_url\", \"bio\" }\n}"
-          }
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Admin VSDox\",\n  \"bio\": \"Document intelligence expert.\",\n  \"avatar_url\": \"https://example.com/avatar.png\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/profile", "host": ["{{baseUrl}}"], "path": ["auth","profile"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Admin VSDox\",\n    \"email\": \"admin@vsdox.com\",\n    \"role\": \"admin\",\n    \"avatar_url\": \"https://example.com/avatar.png\",\n    \"bio\": \"Document intelligence expert.\"\n  }\n}"
+            }
+          ]
         },
+
         {
           "name": "Change Password",
           "request": {
             "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{token}}" }
-            ],
-            "body": { "mode": "raw", "raw": "{\n  \"current_password\": \"password123\",\n  \"new_password\": \"newpassword456\"\n}" },
-            "url": { "raw": "{{base_url}}/auth/change-password", "host": ["{{base_url}}"], "path": ["auth", "change-password"] },
-            "description": "Change password for logged-in user.\n\nValidations:\n- Both fields required\n- new_password minimum 8 characters\n- current_password must match\n\nResponse: { \"message\": \"Password changed successfully\" }\n401: { \"error\": \"Current password is incorrect\" }"
-          }
-        }
-      ]
-    },
-    {
-      "name": "02. Categories",
-      "item": [
-        {
-          "name": "Get All Categories",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": { "raw": "{{base_url}}/categories", "host": ["{{base_url}}"], "path": ["categories"] },
-            "description": "Public — no token required.\n\nResponse: [ { \"id\", \"name\", \"slug\", \"description\", \"created_at\" } ]"
-          }
-        },
-        {
-          "name": "Create Category",
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "const r = pm.response.json();",
-            "if (r.id) { pm.collectionVariables.set('category_id', r.id); }"
-          ]}}],
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{token}}" }
-            ],
-            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Technology\",\n  \"description\": \"Tech related posts\"\n}" },
-            "url": { "raw": "{{base_url}}/categories", "host": ["{{base_url}}"], "path": ["categories"] },
-            "description": "Create a category. Slug auto-generated from name.\n\nResponse: { \"id\", \"name\", \"slug\", \"description\", \"created_at\" }\n\nCategory ID auto-saved."
-          }
-        },
-        {
-          "name": "Delete Category",
-          "request": {
-            "method": "DELETE",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-            "url": { "raw": "{{base_url}}/categories/{{category_id}}", "host": ["{{base_url}}"], "path": ["categories", "{{category_id}}"] },
-            "description": "Requires role: admin or editor.\n\nResponse: { \"message\": \"Category deleted\" }"
-          }
-        }
-      ]
-    },
-    {
-      "name": "03. Tags",
-      "item": [
-        {
-          "name": "Get All Tags",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": { "raw": "{{base_url}}/tags", "host": ["{{base_url}}"], "path": ["tags"] },
-            "description": "Public — no token required.\n\nResponse: [ { \"id\", \"name\", \"slug\" } ]"
-          }
-        },
-        {
-          "name": "Create Tag",
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "const r = pm.response.json();",
-            "if (r.id) { pm.collectionVariables.set('tag_id', r.id); }"
-          ]}}],
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{token}}" }
-            ],
-            "body": { "mode": "raw", "raw": "{\n  \"name\": \"nodejs\"\n}" },
-            "url": { "raw": "{{base_url}}/tags", "host": ["{{base_url}}"], "path": ["tags"] },
-            "description": "Create a tag. Uses ON CONFLICT — safe to call with duplicate names.\n\nResponse: { \"id\", \"name\", \"slug\" }\n\nTag ID auto-saved."
-          }
-        },
-        {
-          "name": "Delete Tag",
-          "request": {
-            "method": "DELETE",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-            "url": { "raw": "{{base_url}}/tags/{{tag_id}}", "host": ["{{base_url}}"], "path": ["tags", "{{tag_id}}"] },
-            "description": "Requires role: admin or editor.\n\nResponse: { \"message\": \"Tag deleted\" }"
-          }
-        }
-      ]
-    },
-    {
-      "name": "04. Media",
-      "item": [
-        {
-          "name": "Upload Image",
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "const r = pm.response.json();",
-            "if (r.id) { pm.collectionVariables.set('media_id', r.id); }"
-          ]}}],
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
-              "mode": "formdata",
-              "formdata": [{ "key": "image", "type": "file", "src": "", "description": "PNG, JPG, WebP, GIF, SVG. Max 10MB." }]
+              "mode": "raw",
+              "raw": "{\n  \"current_password\": \"Password123!\",\n  \"new_password\": \"NewPassword456!\"\n}"
             },
-            "url": { "raw": "{{base_url}}/media/upload", "host": ["{{base_url}}"], "path": ["media", "upload"] },
-            "description": "Upload image to Cloudinary.\n\nBody: form-data → Key: image, Type: File\n\nResponse:\n{\n  \"id\", \"filename\", \"original_name\", \"url\", \"public_id\",\n  \"file_type\", \"size\", \"uploader_id\", \"uploaded_at\"\n}\n\nMedia ID auto-saved."
-          }
-        },
-        {
-          "name": "Get All Media",
-          "request": {
-            "method": "GET",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-            "url": {
-              "raw": "{{base_url}}/media?page=1&limit=20",
-              "host": ["{{base_url}}"], "path": ["media"],
-              "query": [
-                { "key": "page", "value": "1" },
-                { "key": "limit", "value": "20" }
-              ]
+            "url": { "raw": "{{baseUrl}}/auth/change-password", "host": ["{{baseUrl}}"], "path": ["auth","change-password"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"message\": \"Password changed successfully\" }"
             },
-            "description": "Paginated list of all uploaded media.\n\nQuery params: page, limit\n\nResponse: [ { \"id\", \"filename\", \"original_name\", \"url\", \"file_type\", \"size\", \"uploader_name\", \"uploaded_at\" } ]"
-          }
+            {
+              "name": "401 Wrong current password",
+              "status": "Unauthorized",
+              "code": 401,
+              "body": "{ \"error\": \"Current password is incorrect\" }"
+            },
+            {
+              "name": "400 Too short",
+              "status": "Bad Request",
+              "code": 400,
+              "body": "{ \"error\": \"New password must be at least 8 characters\" }"
+            }
+          ]
         },
+
         {
-          "name": "Delete Media",
+          "name": "Request Password Reset",
           "request": {
-            "method": "DELETE",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-            "url": { "raw": "{{base_url}}/media/{{media_id}}", "host": ["{{base_url}}"], "path": ["media", "{{media_id}}"] },
-            "description": "Deletes from both Cloudinary and database.\n\nResponse: { \"message\": \"Media deleted\" }"
-          }
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@vsdox.com\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/forgot-password", "host": ["{{baseUrl}}"], "path": ["auth","forgot-password"] }
+          },
+          "response": [
+            {
+              "name": "200 OK (email sent or silently ignored)",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"message\": \"If the email exists, you will receive password reset instructions shortly.\",\n  \"expires_at\": \"2024-01-01T01:00:00.000Z\"\n}"
+            },
+            {
+              "name": "429 Reset already pending",
+              "status": "Too Many Requests",
+              "code": 429,
+              "body": "{ \"error\": \"A reset request is already pending. Please wait until the previous token expires before requesting again.\" }"
+            }
+          ]
+        },
+
+        {
+          "name": "Reset Password",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{resetToken}}\",\n  \"password\": \"NewPassword789!\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/reset-password", "host": ["{{baseUrl}}"], "path": ["auth","reset-password"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"message\": \"Password reset successfully\" }"
+            },
+            {
+              "name": "400 Invalid or expired token",
+              "status": "Bad Request",
+              "code": 400,
+              "body": "{ \"error\": \"Invalid or expired reset token\" }"
+            }
+          ]
         }
+
       ]
     },
+
     {
-      "name": "05. Posts — Public",
+      "name": "Posts — Public",
+      "description": "No authentication required. These endpoints serve the public-facing blog.",
       "item": [
+
         {
-          "name": "Get All Published Posts",
+          "name": "Get Published Posts",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "pm.test('Has posts array', () => pm.expect(pm.response.json().posts).to.be.an('array'));"
+              ],
+              "type": "text/javascript"
+            }
+          }],
           "request": {
+            "auth": { "type": "noauth" },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/posts?page=1&limit=10",
-              "host": ["{{base_url}}"], "path": ["posts"],
+              "raw": "{{baseUrl}}/posts?page=1&limit=6&search=",
+              "host": ["{{baseUrl}}"],
+              "path": ["posts"],
               "query": [
-                { "key": "page",   "value": "1" },
-                { "key": "limit",  "value": "10" },
-                { "key": "search", "value": "", "disabled": true }
+                { "key": "page",   "value": "1",  "description": "Page number (default: 1)" },
+                { "key": "limit",  "value": "6",  "description": "Posts per page (default: 10)" },
+                { "key": "search", "value": "",   "description": "Search term (optional)", "disabled": true }
               ]
-            },
-            "description": "Public — no token. Returns published posts only.\n\nQuery params:\n- page (default: 1)\n- limit (default: 10)\n- search — searches title and excerpt\n\nResponse:\n{\n  \"posts\": [ BlogCard objects ],\n  \"total\": 42,\n  \"page\": 1,\n  \"limit\": 10\n}\n\nEach post: { id, slug, status, category, date, title, excerpt, image, author, authorRole, body_html, reading_time, views, meta_title, meta_description, categories[], tags[] }"
-          }
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"posts\": [\n    {\n      \"id\": 1,\n      \"slug\": \"my-first-post\",\n      \"title\": \"My First Post\",\n      \"excerpt\": \"A short summary.\",\n      \"image\": \"http://localhost:5000/uploads/1700000000000-abc123.jpg\",\n      \"author\": \"Admin User\",\n      \"date\": \"2024-01-01T00:00:00.000Z\",\n      \"status\": \"published\",\n      \"categories\": [{ \"id\": 1, \"name\": \"Technology\" }],\n      \"tags\": [{ \"id\": 1, \"name\": \"nodejs\" }]\n    }\n  ],\n  \"total\": 1,\n  \"page\": 1,\n  \"limit\": 6\n}"
+            }
+          ]
         },
+
         {
           "name": "Get Post by Slug",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "pm.test('Has body_html', () => pm.expect(pm.response.json()).to.have.property('body_html'));"
+              ],
+              "type": "text/javascript"
+            }
+          }],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postSlug}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["posts", "{{postSlug}}"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"id\": 1,\n  \"slug\": \"my-first-post\",\n  \"title\": \"My First Post\",\n  \"body\": \"# Hello\\n\\nWorld\",\n  \"body_html\": \"<h1>Hello</h1><p>World</p>\",\n  \"excerpt\": \"A short summary.\",\n  \"image\": \"http://localhost:5000/uploads/photo.jpg\",\n  \"author\": \"Admin User\",\n  \"date\": \"2024-01-01T00:00:00.000Z\",\n  \"status\": \"published\",\n  \"reading_time\": 1,\n  \"views\": 42,\n  \"categories\": [{ \"id\": 1, \"name\": \"Technology\" }],\n  \"tags\": [{ \"id\": 1, \"name\": \"nodejs\" }]\n}"
+            },
+            {
+              "name": "404 Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "body": "{ \"error\": \"Post not found\" }"
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "name": "Posts — Admin",
+      "description": "All endpoints require a valid Bearer token (admin role).",
+      "item": [
+
+        {
+          "name": "Get All Posts (Admin)",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "pm.test('Has posts array', () => pm.expect(pm.response.json().posts).to.be.an('array'));",
+                "const posts = pm.response.json().posts;",
+                "if (posts.length > 0) {",
+                "  pm.collectionVariables.set('postId', posts[0].id);",
+                "  pm.collectionVariables.set('postSlug', posts[0].slug);",
+                "}"
+              ],
+              "type": "text/javascript"
+            }
+          }],
           "request": {
             "method": "GET",
             "header": [],
-            "url": { "raw": "{{base_url}}/posts/{{post_slug}}", "host": ["{{base_url}}"], "path": ["posts", "{{post_slug}}"] },
-            "description": "Public — no token. Returns single published post. Also increments view counter.\n\nReplace {{post_slug}} with the actual slug e.g. 'my-first-blog-post'\n\nResponse: Full BlogCard-shaped post object including body_html\n\n404: { \"error\": \"Post not found\" }"
-          }
-        }
-      ]
-    },
-    {
-      "name": "06. Posts — Admin",
-      "item": [
-        {
-          "name": "Get All Posts (incl. drafts)",
-          "request": {
-            "method": "GET",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
-              "raw": "{{base_url}}/posts/admin/all?page=1&limit=50",
-              "host": ["{{base_url}}"], "path": ["posts", "admin", "all"],
+              "raw": "{{baseUrl}}/posts/admin/all?page=1&limit=100&status=&search=",
+              "host": ["{{baseUrl}}"],
+              "path": ["posts","admin","all"],
               "query": [
-                { "key": "page",   "value": "1" },
-                { "key": "limit",  "value": "50" },
-                { "key": "status", "value": "draft", "disabled": true }
+                { "key": "page",   "value": "1",   "description": "Page number" },
+                { "key": "limit",  "value": "100", "description": "Posts per page" },
+                { "key": "status", "value": "",    "description": "Filter: draft | published | scheduled | archived", "disabled": true },
+                { "key": "search", "value": "",    "description": "Search term", "disabled": true }
               ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"posts\": [\n    {\n      \"id\": 1,\n      \"slug\": \"my-first-post\",\n      \"title\": \"My First Post\",\n      \"status\": \"draft\",\n      \"excerpt\": \"A short summary.\",\n      \"image\": \"http://localhost:5000/uploads/photo.jpg\",\n      \"author\": \"Admin User\",\n      \"date\": null,\n      \"categories\": [{ \"id\": 1, \"name\": \"Technology\" }],\n      \"tags\": []\n    }\n  ],\n  \"total\": 1\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "Create Post",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  const d = pm.response.json();",
+                "  pm.collectionVariables.set('postId', d.post.id);",
+                "  pm.collectionVariables.set('postSlug', d.post.slug);",
+                "  pm.test('Status 201', () => pm.response.to.have.status(201));",
+                "  pm.test('Post has id', () => pm.expect(d.post.id).to.be.a('number'));",
+                "}"
+              ],
+              "type": "text/javascript"
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"My First Post\",\n  \"body\": \"# Hello\\n\\nThis is the post body written in **markdown**.\",\n  \"excerpt\": \"A short summary of the post.\",\n  \"status\": \"draft\",\n  \"featured_image\": \"\",\n  \"featured_image_alt\": \"\",\n  \"meta_title\": \"\",\n  \"meta_description\": \"\",\n  \"category_ids\": [1],\n  \"tag_ids\": [1],\n  \"scheduled_at\": null\n}"
             },
-            "description": "Returns all posts including drafts and scheduled.\n\nQuery params:\n- page, limit\n- status (optional): draft | published | scheduled | archived\n\nResponse: { \"posts\": [ BlogCard objects ] }"
-          }
+            "url": { "raw": "{{baseUrl}}/posts/admin", "host": ["{{baseUrl}}"], "path": ["posts","admin"] }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"message\": \"Post created\",\n  \"post\": {\n    \"id\": 1,\n    \"slug\": \"my-first-post\",\n    \"title\": \"My First Post\",\n    \"status\": \"draft\",\n    \"body\": \"# Hello\\n\\nThis is the post body.\",\n    \"body_html\": \"<h1>Hello</h1><p>This is the post body.</p>\"\n  }\n}"
+            }
+          ]
         },
-        {
-          "name": "Create Post — Draft",
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "const r = pm.response.json();",
-            "if (r.post) {",
-            "  pm.collectionVariables.set('post_id', r.post.id);",
-            "  pm.collectionVariables.set('post_slug', r.post.slug);",
-            "}"
-          ]}}],
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{token}}" }
-            ],
-            "body": { "mode": "raw", "raw": "{\n  \"title\": \"My First Blog Post\",\n  \"body\": \"# Hello World\\n\\nThis is **markdown** content.\\n\\n## Section Two\\n\\nMore content here with `code` snippets:\\n\\n- Item one\\n- Item two\\n- Item three\\n\\n> A blockquote for emphasis\",\n  \"excerpt\": \"A short summary shown in blog listings.\",\n  \"status\": \"draft\",\n  \"featured_image\": null,\n  \"featured_image_alt\": \"\",\n  \"meta_title\": \"My First Blog Post | VSDox\",\n  \"meta_description\": \"SEO description under 160 characters.\",\n  \"category_ids\": [\"{{category_id}}\"],\n  \"tag_ids\": [\"{{tag_id}}\"],\n  \"scheduled_at\": null\n}" },
-            "url": { "raw": "{{base_url}}/posts/admin", "host": ["{{base_url}}"], "path": ["posts", "admin"] },
-            "description": "Create a draft post.\n\nRequired: title\nOptional: body (Markdown), excerpt, status, featured_image, featured_image_alt, meta_title, meta_description, category_ids[], tag_ids[], scheduled_at\n\nSlug auto-generated from title.\nMarkdown auto-rendered to HTML.\nreading_time auto-calculated.\n\nStatus values: draft | published | scheduled | archived\n\nResponse:\n{ \"message\": \"Post created\", \"post\": { \"id\", \"slug\", \"status\" } }\n\nPost ID + slug auto-saved."
-          }
-        },
-        {
-          "name": "Create Post — Published",
-          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
-            "const r = pm.response.json();",
-            "if (r.post) {",
-            "  pm.collectionVariables.set('post_id', r.post.id);",
-            "  pm.collectionVariables.set('post_slug', r.post.slug);",
-            "}"
-          ]}}],
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{token}}" }
-            ],
-            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Published Post Title\",\n  \"body\": \"# Live Content\\n\\nThis post goes live immediately.\",\n  \"excerpt\": \"This post is published right away.\",\n  \"status\": \"published\",\n  \"featured_image\": null,\n  \"featured_image_alt\": \"\",\n  \"meta_title\": \"Published Post | VSDox\",\n  \"meta_description\": \"SEO description.\",\n  \"category_ids\": [\"{{category_id}}\"],\n  \"tag_ids\": [\"{{tag_id}}\"],\n  \"scheduled_at\": null\n}" },
-            "url": { "raw": "{{base_url}}/posts/admin", "host": ["{{base_url}}"], "path": ["posts", "admin"] },
-            "description": "Create and immediately publish. Sets published_at = NOW()."
-          }
-        },
-        {
-          "name": "Create Post — Scheduled",
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{token}}" }
-            ],
-            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Scheduled Post Title\",\n  \"body\": \"# Coming Soon\\n\\nScheduled for the future.\",\n  \"excerpt\": \"Goes live at scheduled time.\",\n  \"status\": \"scheduled\",\n  \"featured_image\": null,\n  \"featured_image_alt\": \"\",\n  \"meta_title\": \"Scheduled Post | VSDox\",\n  \"meta_description\": \"SEO description.\",\n  \"category_ids\": [\"{{category_id}}\"],\n  \"tag_ids\": [\"{{tag_id}}\"],\n  \"scheduled_at\": \"2025-06-01T09:00:00Z\"\n}" },
-            "url": { "raw": "{{base_url}}/posts/admin", "host": ["{{base_url}}"], "path": ["posts", "admin"] },
-            "description": "Create a scheduled post. Update scheduled_at to desired ISO 8601 datetime."
-          }
-        },
+
         {
           "name": "Update Post",
           "request": {
             "method": "PUT",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{token}}" }
-            ],
-            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Updated Post Title\",\n  \"body\": \"# Updated Content\\n\\nThis content has been edited.\",\n  \"excerpt\": \"Updated short summary.\",\n  \"status\": \"published\",\n  \"featured_image\": null,\n  \"featured_image_alt\": \"\",\n  \"meta_title\": \"Updated Post | VSDox\",\n  \"meta_description\": \"Updated SEO description.\",\n  \"category_ids\": [\"{{category_id}}\"],\n  \"tag_ids\": [\"{{tag_id}}\"],\n  \"scheduled_at\": null\n}" },
-            "url": { "raw": "{{base_url}}/posts/admin/{{post_id}}", "host": ["{{base_url}}"], "path": ["posts", "admin", "{{post_id}}"] },
-            "description": "Full update. All fields optional — only provided fields updated (COALESCE).\n\nAutomatically saves previous version as a revision.\npublished_at set only on first publish.\n\nResponse:\n{ \"message\": \"Post updated\", \"post\": { \"id\", \"slug\", \"status\" } }"
-          }
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"My Updated Post Title\",\n  \"body\": \"# Updated\\n\\nUpdated body content.\",\n  \"excerpt\": \"Updated excerpt.\",\n  \"status\": \"draft\",\n  \"featured_image\": \"http://localhost:5000/uploads/photo.jpg\",\n  \"featured_image_alt\": \"A photo\",\n  \"meta_title\": \"SEO Title\",\n  \"meta_description\": \"SEO description under 160 chars.\",\n  \"category_ids\": [1],\n  \"tag_ids\": [1, 2],\n  \"scheduled_at\": null\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/posts/admin/{{postId}}", "host": ["{{baseUrl}}"], "path": ["posts","admin","{{postId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"message\": \"Post updated\",\n  \"post\": { \"id\": 1, \"slug\": \"my-updated-post-title\", \"title\": \"My Updated Post Title\", \"status\": \"draft\" }\n}"
+            }
+          ]
         },
+
         {
           "name": "Publish Post",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "pm.test('Status is published', () => pm.expect(pm.response.json().post.status).to.eql('published'));"
+              ],
+              "type": "text/javascript"
+            }
+          }],
           "request": {
             "method": "PATCH",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-            "url": { "raw": "{{base_url}}/posts/admin/{{post_id}}/publish", "host": ["{{base_url}}"], "path": ["posts", "admin", "{{post_id}}", "publish"] },
-            "description": "Instantly publish a draft or scheduled post. No body required.\n\n- status = 'published'\n- published_at = NOW() only if not already set\n\nResponse:\n{ \"message\": \"Post published\", \"post\": { \"id\", \"slug\", \"status\", \"published_at\" } }"
-          }
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/posts/admin/{{postId}}/publish", "host": ["{{baseUrl}}"], "path": ["posts","admin","{{postId}}","publish"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"message\": \"Post published\",\n  \"post\": { \"id\": 1, \"status\": \"published\", \"date\": \"2024-01-01T00:00:00.000Z\" }\n}"
+            }
+          ]
         },
+
         {
           "name": "Withdraw Post",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "pm.test('Status is draft', () => pm.expect(pm.response.json().post.status).to.eql('draft'));"
+              ],
+              "type": "text/javascript"
+            }
+          }],
           "request": {
             "method": "PATCH",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-            "url": { "raw": "{{base_url}}/posts/admin/{{post_id}}/withdraw", "host": ["{{base_url}}"], "path": ["posts", "admin", "{{post_id}}", "withdraw"] },
-            "description": "Pull a published post back to draft. No body required.\n\n- status = 'draft'\n- published_at preserved (not cleared)\n\nResponse:\n{ \"message\": \"Post withdrawn to draft\", \"post\": { \"id\", \"slug\", \"status\" } }"
-          }
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/posts/admin/{{postId}}/withdraw", "host": ["{{baseUrl}}"], "path": ["posts","admin","{{postId}}","withdraw"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"message\": \"Post withdrawn to draft\",\n  \"post\": { \"id\": 1, \"status\": \"draft\" }\n}"
+            }
+          ]
         },
+
         {
-          "name": "Delete Post (Soft)",
+          "name": "Delete Post",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "pm.test('Has deleted id', () => pm.expect(pm.response.json().id).to.be.a('number'));"
+              ],
+              "type": "text/javascript"
+            }
+          }],
           "request": {
             "method": "DELETE",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-            "url": { "raw": "{{base_url}}/posts/admin/{{post_id}}", "host": ["{{base_url}}"], "path": ["posts", "admin", "{{post_id}}"] },
-            "description": "Soft delete — sets deleted_at. Post hidden from all public queries but stays in DB.\n\nRequires role: admin or editor.\n\nResponse: { \"message\": \"\\\"Post Title\\\" has been deleted\", \"id\" }\n404: Post not found or already deleted"
-          }
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/posts/admin/{{postId}}", "host": ["{{baseUrl}}"], "path": ["posts","admin","{{postId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"message\": \"\\\"My First Post\\\" has been deleted\", \"id\": 1 }"
+            }
+          ]
         },
+
+        {
+          "name": "Get Post Preview (Draft)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/posts/admin/{{postId}}/preview", "host": ["{{baseUrl}}"], "path": ["posts","admin","{{postId}}","preview"] }
+          },
+          "response": [
+            {
+              "name": "200 OK — full post object including draft",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"id\": 1,\n  \"slug\": \"my-first-post\",\n  \"title\": \"My First Post\",\n  \"status\": \"draft\",\n  \"body\": \"# Hello\",\n  \"body_html\": \"<h1>Hello</h1>\",\n  \"excerpt\": \"A short summary.\",\n  \"categories\": [],\n  \"tags\": []\n}"
+            }
+          ]
+        },
+
         {
           "name": "Get Post Revisions",
           "request": {
             "method": "GET",
-            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-            "url": { "raw": "{{base_url}}/posts/admin/{{post_id}}/revisions", "host": ["{{base_url}}"], "path": ["posts", "admin", "{{post_id}}", "revisions"] },
-            "description": "Get version history. A revision is saved automatically on every update.\n\nResponse: [ { \"id\", \"post_id\", \"title\", \"body\", \"author_name\", \"created_at\" } ] newest first"
-          }
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/posts/admin/{{postId}}/revisions", "host": ["{{baseUrl}}"], "path": ["posts","admin","{{postId}}","revisions"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "[\n  {\n    \"id\": 1,\n    \"post_id\": 1,\n    \"title\": \"My First Post\",\n    \"body\": \"# Hello\",\n    \"created_at\": \"2024-01-01T00:00:00.000Z\",\n    \"editor_name\": \"Admin User\"\n  }\n]"
+            }
+          ]
         }
+
       ]
     },
+
     {
-      "name": "07. Error Code Reference (read only)",
+      "name": "Categories",
+      "description": "GET is public. POST and DELETE require authentication.",
       "item": [
+
         {
-          "name": "Trigger 401 — Invalid Token",
+          "name": "Get All Categories",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "pm.test('Is array', () => pm.expect(pm.response.json()).to.be.an('array'));",
+                "const cats = pm.response.json();",
+                "if (cats.length > 0) pm.collectionVariables.set('categoryId', cats[0].id);"
+              ],
+              "type": "text/javascript"
+            }
+          }],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/categories", "host": ["{{baseUrl}}"], "path": ["categories"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "[\n  { \"id\": 1, \"name\": \"Technology\", \"slug\": \"technology\", \"description\": \"Tech articles\" },\n  { \"id\": 2, \"name\": \"Business\",    \"slug\": \"business\",    \"description\": null }\n]"
+            }
+          ]
+        },
+
+        {
+          "name": "Create Category",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  pm.collectionVariables.set('categoryId', pm.response.json().id);",
+                "  pm.test('Status 201', () => pm.response.to.have.status(201));",
+                "}"
+              ],
+              "type": "text/javascript"
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Technology\",\n  \"description\": \"Articles about tech trends and tools.\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/categories", "host": ["{{baseUrl}}"], "path": ["categories"] }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "body": "{ \"id\": 1, \"name\": \"Technology\", \"slug\": \"technology\", \"description\": \"Articles about tech trends and tools.\" }"
+            }
+          ]
+        },
+
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/categories/{{categoryId}}", "host": ["{{baseUrl}}"], "path": ["categories","{{categoryId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"message\": \"Category deleted\" }"
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "name": "Tags",
+      "description": "GET is public. POST uses upsert (conflict on slug). DELETE requires authentication.",
+      "item": [
+
+        {
+          "name": "Get All Tags",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "pm.test('Is array', () => pm.expect(pm.response.json()).to.be.an('array'));",
+                "const tags = pm.response.json();",
+                "if (tags.length > 0) pm.collectionVariables.set('tagId', tags[0].id);"
+              ],
+              "type": "text/javascript"
+            }
+          }],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/tags", "host": ["{{baseUrl}}"], "path": ["tags"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "[\n  { \"id\": 1, \"name\": \"nodejs\",     \"slug\": \"nodejs\" },\n  { \"id\": 2, \"name\": \"postgresql\", \"slug\": \"postgresql\" }\n]"
+            }
+          ]
+        },
+
+        {
+          "name": "Create Tag",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  pm.collectionVariables.set('tagId', pm.response.json().id);",
+                "  pm.test('Status 201', () => pm.response.to.have.status(201));",
+                "}"
+              ],
+              "type": "text/javascript"
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Node.js\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/tags", "host": ["{{baseUrl}}"], "path": ["tags"] }
+          },
+          "response": [
+            {
+              "name": "201 Created (or upserted)",
+              "status": "Created",
+              "code": 201,
+              "body": "{ \"id\": 1, \"name\": \"Node.js\", \"slug\": \"nodejs\" }"
+            }
+          ]
+        },
+
+        {
+          "name": "Delete Tag",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/tags/{{tagId}}", "host": ["{{baseUrl}}"], "path": ["tags","{{tagId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"message\": \"Tag deleted\" }"
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "name": "Media",
+      "description": "All endpoints require authentication. Upload is multipart/form-data. Delete checks for in-use images (409 if referenced in live posts).",
+      "item": [
+
+        {
+          "name": "Upload Image",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  const d = pm.response.json();",
+                "  pm.collectionVariables.set('mediaId', d.id);",
+                "  pm.test('Status 201', () => pm.response.to.have.status(201));",
+                "  pm.test('Has url', () => pm.expect(d.url).to.be.a('string'));",
+                "  pm.test('Has filename', () => pm.expect(d.filename).to.be.a('string'));",
+                "}"
+              ],
+              "type": "text/javascript"
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "",
+                  "description": "Image file — JPEG, PNG, WebP, GIF or SVG, max 10 MB"
+                }
+              ]
+            },
+            "url": { "raw": "{{baseUrl}}/media/upload", "host": ["{{baseUrl}}"], "path": ["media","upload"] }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"id\": 1,\n  \"filename\": \"1700000000000-abc12345.jpg\",\n  \"original_name\": \"my-photo.jpg\",\n  \"url\": \"http://localhost:5000/uploads/1700000000000-abc12345.jpg\",\n  \"public_id\": \"1700000000000-abc12345.jpg\",\n  \"file_type\": \"image/jpeg\",\n  \"size\": 204800,\n  \"uploader_id\": 1,\n  \"uploaded_at\": \"2024-01-01T00:00:00.000Z\"\n}"
+            },
+            {
+              "name": "400 No file provided",
+              "status": "Bad Request",
+              "code": 400,
+              "body": "{ \"error\": \"No file provided\" }"
+            },
+            {
+              "name": "400 Wrong file type",
+              "status": "Bad Request",
+              "code": 400,
+              "body": "{ \"error\": \"Only image files are allowed (JPEG, PNG, WebP, GIF, SVG)\" }"
+            }
+          ]
+        },
+
+        {
+          "name": "Get Media Library",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "pm.test('Is array', () => pm.expect(pm.response.json()).to.be.an('array'));",
+                "const media = pm.response.json();",
+                "if (media.length > 0) pm.collectionVariables.set('mediaId', media[0].id);"
+              ],
+              "type": "text/javascript"
+            }
+          }],
           "request": {
             "method": "GET",
-            "header": [{ "key": "Authorization", "value": "Bearer INVALID_TOKEN" }],
-            "url": { "raw": "{{base_url}}/auth/me", "host": ["{{base_url}}"], "path": ["auth", "me"] },
-            "description": "All error responses include a 'code' field:\n\nAUTH CODES (401):\n  NO_TOKEN       — Authorization header missing\n  TOKEN_EXPIRED  — JWT expired (7 day TTL)\n  TOKEN_REVOKED  — Token was logged out / blacklisted\n  INVALID_TOKEN  — Signature invalid or malformed\n  USER_NOT_FOUND — User deleted after token issued\n\nPERMISSION CODES (403):\n  FORBIDDEN — Role not allowed for this action\n\nFrontend AuthContext.jsx auto-redirects to /admin/login when TOKEN_EXPIRED or TOKEN_REVOKED is received on any request."
-          }
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/media?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["media"],
+              "query": [
+                { "key": "page",  "value": "1",  "description": "Page number (default: 1)" },
+                { "key": "limit", "value": "20", "description": "Items per page (default: 20)" }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "[\n  {\n    \"id\": 1,\n    \"filename\": \"1700000000000-abc12345.jpg\",\n    \"original_name\": \"my-photo.jpg\",\n    \"url\": \"http://localhost:5000/uploads/1700000000000-abc12345.jpg\",\n    \"file_type\": \"image/jpeg\",\n    \"size\": 204800,\n    \"uploader_name\": \"Admin User\",\n    \"uploaded_at\": \"2024-01-01T00:00:00.000Z\"\n  }\n]"
+            }
+          ]
+        },
+
+        {
+          "name": "Check Media Usage",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                "pm.test('Has in_use field', () => pm.expect(pm.response.json()).to.have.property('in_use'));",
+                "pm.test('Has used_in array', () => pm.expect(pm.response.json().used_in).to.be.an('array'));"
+              ],
+              "type": "text/javascript"
+            }
+          }],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/media/{{mediaId}}/usage", "host": ["{{baseUrl}}"], "path": ["media","{{mediaId}}","usage"] }
+          },
+          "response": [
+            {
+              "name": "200 OK — not in use",
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"in_use\": false, \"used_in\": [] }"
+            },
+            {
+              "name": "200 OK — in use",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"in_use\": true,\n  \"used_in\": [\n    { \"id\": 1, \"title\": \"My First Post\" },\n    { \"id\": 3, \"title\": \"Another Post\" }\n  ]\n}"
+            },
+            {
+              "name": "404 Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "body": "{ \"error\": \"Media not found\" }"
+            }
+          ]
+        },
+
+        {
+          "name": "Delete Media",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('200 or 409', () => {",
+                "  pm.expect(pm.response.code).to.be.oneOf([200, 409]);",
+                "});",
+                "if (pm.response.code === 409) {",
+                "  pm.test('Has MEDIA_IN_USE code', () => pm.expect(pm.response.json().code).to.eql('MEDIA_IN_USE'));",
+                "}"
+              ],
+              "type": "text/javascript"
+            }
+          }],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/media/{{mediaId}}", "host": ["{{baseUrl}}"], "path": ["media","{{mediaId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"message\": \"Media deleted\" }"
+            },
+            {
+              "name": "404 Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "body": "{ \"error\": \"Media not found\" }"
+            },
+            {
+              "name": "409 Image In Use",
+              "status": "Conflict",
+              "code": 409,
+              "body": "{\n  \"error\": \"Image is in use\",\n  \"code\": \"MEDIA_IN_USE\",\n  \"used_in\": [\n    { \"id\": 1, \"title\": \"My First Post\" }\n  ]\n}"
+            }
+          ]
         }
+
       ]
     }
+
   ]
 }

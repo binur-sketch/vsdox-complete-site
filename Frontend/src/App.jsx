@@ -8,6 +8,7 @@ import {
   Solutions,
   Industries,
   Resources,
+  Contact,
   Legal,
   About
 } from './pages/Pages';

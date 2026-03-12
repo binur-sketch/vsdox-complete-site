@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { handleFormSubmission } from '../utils/formHandler';
+import { APP_CONTACT, DEFAULTS, LINKS } from '../config/appConstants';
 
 
 
@@ -53,7 +54,7 @@ const caseStudies = [
         tech: 'Java 17, Springboot, Hibernate, React, PostgreSQL'
     },
     {
-        tag: 'CORPORATE',
+        tag: 'BFSI',
         tagColor: '#0ea5e9',
         client: 'HDFC Life Insurance',
         logo: 'fa-building-columns',
@@ -70,7 +71,7 @@ const caseStudies = [
             'Scalable repository managing more than 200+ crore documents securely',
             'Improved policy servicing and faster document retrieval for agents and internal teams'
         ],
-        industry: 'Corporate',
+        industry: 'BFSI',
         tech: 'Java, REST APIs, DSpace, AWS S3, AWS RDS Aurora PostgreSQL, Elasticsearch, LDAP'
     },
     {
@@ -115,17 +116,18 @@ const caseStudies = [
         client: 'Aditya Birla Group',
         logo: 'fa-building-columns',
         title: 'Enterprise DMS for a Global Conglomerate',
-        challenge: 'Fragmented document handling across ABHFL, ABFL, and ABCDL subsidiaries resulted in critical retrieval delays, high licensing costs, limited security, and poor version control across 36+ countries.',
-        solution: 'VSDOX DMS deployed across three subsidiaries — ABHFL for automated loan-journey capture & DSA indexing, ABFL for time-bound distributor document management, and ABCDL for integrated DSA journey storage & retrieval on AWS/GCP.',
+        challenge: 'Fragmented document handling at multiple group companies such as ABHFL, ABFL, and ABCDL resulted in critical retrieval delays, high licensing costs, limited security, and poor version control across 36+ countries.',
+        solution: 'VSDOX DMS deployed at group companies — ABHFL for automated loan-journey capture & DSA indexing, ABFL for time-bound distributor document management, and ABCDL for integrated DSA journey storage & retrieval on AWS/GCP.',
         results: [
             'Automated capture & indexing speed up document retrieval',
-            'Reduced licensing costs with open-source VsDox DMS',
+            'Reduced total costs of ownership with VsDox DMS',
             'Enhanced batch barcoding improved document precision',
             'Role-based access & compliance strengthened data protection',
-            'Customized reporting as per business requirements'
+            'Customized reporting as per business requirements',
+            'Successfull migration of data from legacy DMS to VSDOX'
         ],
         industry: 'Banking & Financial Services',
-        tech: 'AWS, GCP, Java, Elasticsearch,Solr, PostgreSQL'
+        tech: 'AWS, GCP, Java, Elasticsearch, Solr, PostgreSQL'
     },
     {
         tag: 'BFSI',
@@ -139,7 +141,9 @@ const caseStudies = [
             'Digitized onboarding reduced manual intervention',
             'Automated validations significantly cut processing time',
             'Real-time dashboards improved operational tracking',
-            'Maker-checker workflows ensured 100% regulatory compliance'
+            'Maker-checker workflows ensured 100% regulatory compliance',
+            'Readily available integration with CRA APIs and 3rd party verification services',
+            'Fully compliant with PFRDA Processes and Guindelines'
         ],
         industry: 'Banking & Financial Services',
         tech: 'React, Java, Spring Boot, PostgreSQL, Tomcat'
@@ -160,6 +164,25 @@ const caseStudies = [
         ],
         industry: 'Manufacturing / Automotive',
         tech: 'SAP, Java, Google Enterprise, Solr, PostgreSQL'
+    },
+    {
+        tag: 'CORPORATE',
+        tagColor: '#0f766e',
+        client: 'Subros Ltd.',
+        logo: 'fa-industry',
+        title: 'Enterprise DMS for Automotive AC Manufacturer',
+        challenge: 'Large volumes of engineering and operational documents were stored across departments using legacy systems like Lotus Notes. The organization faced difficulties in document retrieval, workflow tracking, and secure information sharing. Lack of centralized document storage, limited metadata standardization, and absence of automated workflows created inefficiencies across teams and manufacturing locations.',
+        solution: 'VsDox open-source Document Management System implemented to centralize document storage and automate daily processes. Migrated over 8 TB of legacy data from Lotus Notes to the new DMS platform. Integrated Active Directory for secure authentication and role-based access control. Implemented workflow automation with escalation alerts and email notifications for faster approvals. Added advanced security features including time-bound document sharing, restricted screenshot capture, SSL security, and OWASP-compliant protection. Enabled bilingual metadata support (including Japanese) for indexing, OCR search, and document management.',
+        results: [
+            'Migrated over 8 TB of legacy enterprise documents into a centralized digital repository',
+            'Automated workflow approvals with notifications and escalation mechanisms',
+            'Secure document sharing with time-bound access and enhanced data protection',
+            'Advanced search and metadata indexing improved document retrieval efficiency',
+            'Bilingual metadata support enabled global collaboration and document accessibility',
+            'Scalable open-source ECM platform reduced licensing costs and improved ROI'
+        ],
+        industry: 'Manufacturing / Automotive Components',
+        tech: 'Java, Solr, PostgreSQL'
     },
     {
         tag: 'HEALTHCARE',
@@ -292,7 +315,7 @@ export const ContactUs = () => {
         setSending(true);
         setError(false);
 
-        const success = await handleFormSubmission(formData, 'corp@virsoftech.com');
+        const success = await handleFormSubmission(formData, DEFAULTS.recipientEmail);
 
         if (success) {
             setSubmitted(true);
@@ -333,7 +356,7 @@ export const ContactUs = () => {
                                     {error && (
                                         <div style={{ background: '#fef2f2', border: '1px solid #fecaca', color: '#991b1b', padding: '12px 16px', borderRadius: '8px', marginBottom: '24px', fontSize: '14px' }}>
                                             <i className="fas fa-exclamation-circle" style={{ marginRight: '8px' }}></i>
-                                            Oops! Something went wrong. Please try again or email us directly at corp@virsoftech.com.
+                                            Oops! Something went wrong. Please try again or email us directly at {APP_CONTACT.recipientEmail}.
                                         </div>
                                     )}
 
@@ -400,9 +423,9 @@ export const ContactUs = () => {
                                 {[
                                     { icon: 'fa-location-dot', color: '#dc2626', title: 'Corporate Office (HQ)', lines: ['Vir Softech Pvt. Ltd.', 'A 306, The I Thum, Plot No. A 40,', 'Sector 62, Noida, UP – 201301, India'] },
                                     { icon: 'fa-globe', color: '#6366f1', title: 'International Presence', lines: ['Japan: West Bldg. 302, 3-26-8 Takaido Higashi, Suginami-ku, Tokyo'] },
-                                    { icon: 'fa-phone', color: '#16a34a', title: 'Call Us', lines: ['18005717711 (Toll-Free)', '0120 - 4325 497 (Landline)'] },
-                                    { icon: 'fa-whatsapp', color: '#25d366', title: 'WhatsApp', lines: ['9319086751'] },
-                                    { icon: 'fa-envelope', color: '#1877f2', title: 'Email', lines: ['corp@virsoftech.com', 'support@virsoftech.com'] },
+                                    { icon: 'fa-phone', color: '#16a34a', title: 'Call Us', lines: [`${APP_CONTACT.tollFree} (Toll-Free)`, `${APP_CONTACT.landline} (Landline)`] },
+                                    { icon: 'fa-whatsapp', color: '#25d366', title: 'WhatsApp', lines: [APP_CONTACT.whatsapp] },
+                                    { icon: 'fa-envelope', color: '#1877f2', title: 'Email', lines: [APP_CONTACT.recipientEmail, APP_CONTACT.supportEmail] },
                                     { icon: 'fa-building', color: '#64748b', title: 'Registered Office', lines: ['C-2/54, Ashok Vihar, Phase-II,', 'North West, New Delhi – 110052'] },
                                 ].map((info, i) => (
                                     <div key={i} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start', marginBottom: '24px', background: 'white', padding: '20px', borderRadius: '14px', border: '1px solid var(--border)', boxShadow: '0 4px 6px rgba(0,0,0,0.03)' }}>
@@ -476,9 +499,9 @@ export const PrivacyPolicy = () => {
                                 { id: 'pp-1', title: '2. How We Use Your Data', body: 'We use the information collected to: (a) Respond to your inquiries and provide customer support; (b) Send product updates, newsletters, and marketing communications (with your consent); (c) Improve and personalize your experience on our platform and website; (d) Analyze usage patterns to enhance product functionality; (e) Comply with legal obligations and enforce our terms. We never sell your personal data to third parties.' },
                                 { id: 'pp-2', title: '3. Data Sharing & Third Parties', body: 'We may share your data with trusted service providers who assist in operating our website and delivering services (e.g., CRM software, email platforms, analytics tools). These providers are contractually required to protect your data. We may also disclose data if required by law, court order, or regulatory authority. In the event of a merger or acquisition, data may be transferred as part of that transaction, with prior notice given to you.' },
                                 { id: 'pp-3', title: '4. Data Security', body: 'We implement industry-standard security measures including TLS/SSL encryption for data in transit, AES-256 encryption for data at rest, role-based access controls, regular security audits, and vulnerability assessments. Our platform is ISO 27001-aligned. However, no method of electronic transmission or storage is 100% secure, and we cannot guarantee absolute security.' },
-                                { id: 'pp-4', title: '5. Your Rights', body: 'Depending on your jurisdiction, you may have the right to: access the personal data we hold about you; request correction of inaccurate data; request deletion of your data ("right to be forgotten"); object to processing; request data portability; withdraw consent at any time. To exercise any of these rights, please contact our Data Protection Officer at corp@virsoftech.com.' },
+                                { id: 'pp-4', title: '5. Your Rights', body: `Depending on your jurisdiction, you may have the right to: access the personal data we hold about you; request correction of inaccurate data; request deletion of your data ("right to be forgotten"); object to processing; request data portability; withdraw consent at any time. To exercise any of these rights, please contact our Data Protection Officer at ${APP_CONTACT.recipientEmail}.` },
                                 { id: 'pp-5', title: '6. Cookies & Tracking', body: 'We use essential cookies to provide site functionality, analytical cookies to understand site usage, and optional marketing cookies for personalized advertising. You can manage cookie preferences through our cookie consent banner or your browser settings. Disabling certain cookies may impact site functionality.' },
-                                { id: 'pp-6', title: '7. Contact Us', body: 'For any privacy-related concerns, please contact our Data Protection Officer: Vir Softech Pvt. Ltd., A 306, The I Thum, Sector 62, Noida, India. Email: corp@virsoftech.com. We aim to respond to all requests within 30 days.' },
+                                { id: 'pp-6', title: '7. Contact Us', body: `For any privacy-related concerns, please contact our Data Protection Officer: Vir Softech Pvt. Ltd., A 306, The I Thum, Sector 62, Noida, India. Email: ${APP_CONTACT.recipientEmail}. We aim to respond to all requests within 30 days.` },
                             ].map((section, i) => (
                                 <div key={i} id={section.id} style={{ marginBottom: '40px', paddingBottom: '40px', borderBottom: i < 6 ? '1px solid var(--border)' : 'none' }}>
                                     <h2 style={{ fontSize: '22px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '16px' }}>{section.title}</h2>
@@ -548,7 +571,7 @@ export const TermsConditions = () => {
                             <div style={{ background: '#f8fafc', borderRadius: '16px', padding: '28px', border: '1px solid var(--border)' }}>
                                 <h3 style={{ fontWeight: '800', marginBottom: '12px' }}>Questions About These Terms?</h3>
                                 <p style={{ color: 'var(--text-muted)', marginBottom: '20px' }}>Contact our legal team for any clarifications.</p>
-                                <a href="mailto:corp@virsoftech.com" className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none' }}>corp@virsoftech.com</a>
+                                <a href={LINKS.mailToRecipient} className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none' }}>{APP_CONTACT.recipientEmail}</a>
                             </div>
                         </div>
                     </div>

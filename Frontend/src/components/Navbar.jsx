@@ -76,6 +76,7 @@ const Navbar = () => {
 
     const closeMenu = () => setMenuOpen(false);
 
+    // Close mobile menu on route change
     useEffect(() => { closeMenu(); }, [location.pathname]);
 
     useEffect(() => {
@@ -103,6 +104,7 @@ const Navbar = () => {
             {/* Desktop Nav Links */}
             <div className="nav-links">
 
+                {/* Solutions Dropdown — CSS :hover driven */}
                 <div className="nav-dropdown-wrapper">
                     <Link
                         to="/solutions"
@@ -129,12 +131,11 @@ const Navbar = () => {
 
                 {user && (
                     <div className="user-dropdown-wrapper">
-
+                        {/* User pill */}
                         <div
                             className="user-pill"
                             onClick={() => setUserMenuOpen(prev => !prev)}
-                            style={{ cursor: "pointer" }}
-                        >
+                            style={{ cursor: "pointer" }}>
                             <div className="user-avatar">
                                 {user.name?.[0]?.toUpperCase() || 'A'}
                             </div>
@@ -142,15 +143,14 @@ const Navbar = () => {
                             <i className="fas fa-chevron-down user-arrow"></i>
                         </div>
 
+                        {/* Logout Dropdown */}
                         <div
                             className="user-dropdown"
-                            style={{ display: userMenuOpen ? "block" : "none" }}
-                        >
+                            style={{ display: userMenuOpen ? "block" : "none" }}>
                             <button onClick={handleLogout} className="user-dropdown-item">
                                 <i className="fas fa-sign-out-alt"></i> Logout
                             </button>
                         </div>
-
                     </div>
                 )}
 
@@ -190,38 +190,37 @@ const Navbar = () => {
                         Request Demo
                     </Link>
 
+                    {/* Auth section in mobile menu */}
                     {user && (
-                        <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', marginTop: '20px', paddingTop: '16px' }}>
-
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '0 16px', marginBottom: '16px' }}>
-                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', fontWeight: '800', color: 'white' }}>
+                        <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', marginTop: '12px', paddingTop: '12px' }}>
+                            {/* User info row */}
+                            <div style={{
+                                display: 'flex', alignItems: 'center', gap: '10px',
+                                padding: '10px 16px', marginBottom: '8px',
+                            }}>
+                                <div style={{
+                                    width: '34px', height: '34px', borderRadius: '50%',
+                                    background: 'var(--primary)', flexShrink: 0,
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    fontSize: '14px', fontWeight: '700', color: 'white',
+                                }}>
                                     {user.name?.[0]?.toUpperCase() || 'A'}
                                 </div>
-
-                                <div style={{ lineHeight: '1.2' }}>
-                                    <div style={{ fontSize: '15px', fontWeight: '800', color: 'white' }}>{user.name}</div>
-                                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>{user.role}</div>
+                                <div>
+                                    <div style={{ fontSize: '14px', fontWeight: '700', color: 'inherit' }}>{user.name}</div>
+                                    <div style={{ fontSize: '11px', opacity: 0.6, color: 'inherit' }}>{user.role}</div>
                                 </div>
                             </div>
-
                             <button
                                 onClick={handleLogout}
                                 className="mobile-menu-link"
                                 style={{
-                                    width: '100%',
-                                    textAlign: 'left',
-                                    background: 'transparent',
-                                    border: 'none',
-                                    cursor: 'pointer',
-                                    color: '#f87171',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '10px',
-                                    fontSize: '16px',
-                                    fontWeight: '700'
+                                    width: '100%', textAlign: 'left', background: 'transparent',
+                                    border: 'none', cursor: 'pointer', color: '#f87171',
+                                    display: 'flex', alignItems: 'center', gap: '8px',
                                 }}
                             >
-                                <i className="fas fa-sign-out-alt"></i> Logout from System
+                                <i className="fas fa-sign-out-alt"></i> Logout
                             </button>
 
                         </div>

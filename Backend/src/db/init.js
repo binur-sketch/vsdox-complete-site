@@ -46,6 +46,17 @@ const initDB = async () => {
       CREATE INDEX IF NOT EXISTS idx_sessions_token     ON sessions(session_token);
       CREATE INDEX IF NOT EXISTS idx_sessions_expires   ON sessions(expires_at);
 
+      -- Password reset requests
+      CREATE TABLE IF NOT EXISTS password_reset_requests (
+        id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        user_id    UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        token_hash TEXT NOT NULL,
+        expires_at TIMESTAMP NOT NULL,
+        used       BOOLEAN NOT NULL DEFAULT FALSE,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW()
+      );
+      CREATE INDEX IF NOT EXISTS idx_password_reset_requests_user ON password_reset_requests(user_id);
+
       -- Categories
       CREATE TABLE IF NOT EXISTS categories (
         id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),

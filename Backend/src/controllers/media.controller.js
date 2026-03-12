@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import pool from '../db.js';
+import { appConfig } from '../config/appConfig.js';
 
 // ── Resolve uploads directory ──────────────────────────────────────────
 const __filename = fileURLToPath(import.meta.url);
@@ -43,9 +44,10 @@ export const upload = multer({
 
 // Build the public URL for a stored file
 const buildUrl = (req, filename) => {
-  const base = process.env.API_BASE_URL
-    || `${req.protocol}://${req.get('host')}`;
-  return `${base}/uploads/${filename}`;
+  const configuredBase = appConfig.apiBaseUrl;
+  const fallbackBase = `${req.protocol}://${req.get('host')}`;
+  const base = configuredBase || fallbackBase;
+  return `${base.replace(/\/$/, '')}/uploads/${filename}`;
 };
 
 // ── Upload ─────────────────────────────────────────────────────────────
@@ -105,14 +107,51 @@ export const deleteMedia = async (req, res) => {
     const { rows } = await pool.query('SELECT * FROM media WHERE id = $1', [id]);
     if (!rows[0]) return res.status(404).json({ error: 'Media not found' });
 
-    // Delete physical file from disk
-    const filePath = path.join(UPLOADS_DIR, rows[0].filename);
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
+    const mediaUrl = rows[0].url;
+
+    // Check if this image is referenced in any live (non-deleted) post
+    const { rows: usages } = await pool.query(
+      `SELECT id, title FROM posts
+       WHERE  deleted_at IS NULL
+       AND    (featured_image = $1 OR body LIKE $2 OR body_html LIKE $2)`,
+      [mediaUrl, `%${mediaUrl}%`]
+    );
+
+    if (usages.length > 0) {
+      return res.status(409).json({
+        error: 'Image is in use',
+        code:  'MEDIA_IN_USE',
+        used_in: usages.map(p => ({ id: p.id, title: p.title })),
+      });
     }
+
+    // Safe to delete — remove physical file then DB row
+    const filePath = path.join(UPLOADS_DIR, rows[0].filename);
+    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
 
     await pool.query('DELETE FROM media WHERE id = $1', [id]);
     res.json({ message: 'Media deleted' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// ── Check usage ────────────────────────────────────────────────────────
+// GET /api/media/:id/usage  — returns { in_use: bool, used_in: [{id,title}] }
+export const checkMediaUsage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { rows: media } = await pool.query('SELECT url FROM media WHERE id = $1', [id]);
+    if (!media[0]) return res.status(404).json({ error: 'Media not found' });
+
+    const { rows: usages } = await pool.query(
+      `SELECT id, title FROM posts
+       WHERE  deleted_at IS NULL
+       AND    (featured_image = $1 OR body LIKE $2 OR body_html LIKE $2)`,
+      [media[0].url, `%${media[0].url}%`]
+    );
+
+    res.json({ in_use: usages.length > 0, used_in: usages });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

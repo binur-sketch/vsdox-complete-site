@@ -1,13 +1,15 @@
+import { DEFAULTS, FORM_SUBMIT_BASE_URL } from '../config/appConstants';
+
 /**
  * Form Submission Handler
  * Sends form data to FormSubmit.co via AJAX
  * @param {Object} data - The form data to send
- * @param {string} recipientEmail - The destination email (default: corp@virsoftech.com)
+ * @param {string} recipientEmail - The destination email (defaults to VITE_CONTACT_EMAIL)
  * @returns {Promise<boolean>} - Success or failure
  */
-export const handleFormSubmission = async (data, recipientEmail = 'corp@virsoftech.com') => {
+export const handleFormSubmission = async (data, recipientEmail = DEFAULTS.recipientEmail) => {
     try {
-        const response = await fetch(`https://formsubmit.co/ajax/${recipientEmail}`, {
+        const response = await fetch(`${FORM_SUBMIT_BASE_URL}/${recipientEmail}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

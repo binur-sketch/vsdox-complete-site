@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { handleFormSubmission } from '../utils/formHandler';
+import { APP_CONTACT, DEFAULTS, LINKS } from '../config/appConstants';
 
 
 import MilestoneTimeline from '../components/MilestoneTimeline';
@@ -197,11 +198,11 @@ export const Products = () => {
             {/* Stats Strip */}
             <section style={{ background: '#0f172a', padding: '40px 0' }}>
                 <div className="max-container">
-                    <div className="stats-grid-inline">
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', textAlign: 'center' }}>
                         {stats.map((s, i) => (
                             <div key={i}>
-                                <div style={{ fontSize: 'clamp(32px, 5vw, 42px)', fontWeight: '900', color: '#1d63ed' }}>{s.number}</div>
-                                <div style={{ fontSize: '13px', color: '#94a3b8', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '4px' }}>{s.label}</div>
+                                <div style={{ fontSize: '42px', fontWeight: '900', color: '#1d63ed' }}>{s.number}</div>
+                                <div style={{ fontSize: '14px', color: '#94a3b8', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '4px' }}>{s.label}</div>
                             </div>
                         ))}
                     </div>
@@ -209,29 +210,29 @@ export const Products = () => {
             </section>
 
             {/* Product Overview */}
-            <section className="section-padding" style={{ background: 'white' }}>
+            <section style={{ padding: '100px 0', background: 'white' }}>
                 <div className="max-container reveal">
-                    <div className="two-col-grid">
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
                         <div>
                             <span style={{ display: 'inline-block', background: 'rgba(29,99,237,0.08)', color: '#1d63ed', padding: '6px 16px', borderRadius: '30px', fontWeight: '700', fontSize: '13px', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '1px' }}>What is VSDOX?</span>
-                            <h2 style={{ fontSize: 'clamp(32px, 5vw, 44px)', fontWeight: '900', lineHeight: '1.1', marginBottom: '24px', color: '#0f172a', letterSpacing: '-0.02em' }}>The Intelligent Heart of Your Document Operations</h2>
+                            <h2 style={{ fontSize: '44px', fontWeight: '900', lineHeight: '1.1', marginBottom: '24px', color: '#0f172a', letterSpacing: '-0.02em' }}>The Intelligent Heart of Your Document Operations</h2>
                             <p style={{ fontSize: '17px', color: '#475569', lineHeight: '1.8', marginBottom: '24px', textAlign: 'justify' }}>
                                 VSDOX is Vir Softech's flagship Enterprise Content Management platform — a secure, scalable, and AI-powered solution built on a modern open-source technology stack. It is designed to manage the complete lifecycle of enterprise, judicial, and institutional content: from physical digitization to intelligent search and controlled access.
                             </p>
                             <p style={{ fontSize: '17px', color: '#475569', lineHeight: '1.8', marginBottom: '32px', textAlign: 'justify' }}>
                                 VSDOX eliminates vendor lock-in, reduces operational costs, and empowers organizations to digitally transform their document workflows without replacing existing infrastructure.
                             </p>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'inherit' }}>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
                                 {['Open-Source Based', 'No Seat-Based Licensing', 'ISO 9001:2015 Certified', 'CMMI Level 3', 'VAPT Validated', 'OWASP Compliant'].map((badge, i) => (
                                     <span key={i} style={{ background: '#f1f5f9', padding: '8px 16px', borderRadius: '30px', fontSize: '13px', fontWeight: '700', color: '#334155', border: '1px solid #e2e8f0' }}>{badge}</span>
                                 ))}
                             </div>
                         </div>
-                        <div style={{ position: 'relative', width: '100%' }}>
+                        <div style={{ position: 'relative' }}>
                             <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 40px 80px -20px rgba(0,0,0,0.2)', border: '1px solid #e2e8f0' }}>
-                                <img src="./src/assets/dashboard.png" alt="VSDOX Dashboard" style={{ width: '100%', height: 'auto', minHeight: '300px', objectFit: 'cover' }} />
+                                <img src="./src/assets/dashboard.png" alt="VSDOX Dashboard" style={{ width: '100%', height: '420px', objectFit: 'cover' }} />
                             </div>
-                            <div style={{ position: 'absolute', bottom: '-24px', left: '-24px', display: 'var(--display-floating, block)', background: '#1d63ed', color: 'white', padding: '20px 28px', borderRadius: '16px', boxShadow: '0 10px 30px rgba(29,99,237,0.4)' }}>
+                            <div style={{ position: 'absolute', bottom: '-24px', left: '-24px', background: '#1d63ed', color: 'white', padding: '20px 28px', borderRadius: '16px', boxShadow: '0 10px 30px rgba(29,99,237,0.4)' }}>
                                 <div style={{ fontSize: '28px', fontWeight: '900' }}>200M+</div>
                                 <div style={{ fontSize: '13px', opacity: 0.85 }}>Documents Managed</div>
                             </div>
@@ -241,14 +242,14 @@ export const Products = () => {
             </section>
 
             {/* Core Modules */}
-            <section className="section-padding" style={{ background: '#f8fafc' }}>
+            <section style={{ padding: '100px 0', background: '#f8fafc' }}>
                 <div className="max-container">
                     <div style={{ textAlign: 'center', marginBottom: '64px' }} className="reveal">
                         <span style={{ display: 'inline-block', background: 'rgba(29,99,237,0.08)', color: '#1d63ed', padding: '6px 16px', borderRadius: '30px', fontWeight: '700', fontSize: '13px', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '1px' }}>Core Modules</span>
-                        <h2 style={{ fontSize: 'clamp(32px, 5vw, 44px)', fontWeight: '900', color: '#0f172a', marginBottom: '16px', letterSpacing: '-0.02em' }}>Everything You Need, In One Platform</h2>
+                        <h2 style={{ fontSize: '44px', fontWeight: '900', color: '#0f172a', marginBottom: '16px', letterSpacing: '-0.02em' }}>Everything You Need, In One Platform</h2>
                         <p style={{ fontSize: '18px', color: '#64748b', maxWidth: '700px', margin: '0 auto', lineHeight: '1.7' }}>Six integrated modules that cover the entire content management lifecycle.</p>
                     </div>
-                    <div className="three-col-grid">
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '28px' }}>
                         {coreModules.map((mod, i) => (
                             <div key={i} className="reveal" style={{
                                 background: 'white',
@@ -280,14 +281,14 @@ export const Products = () => {
             </section>
 
             {/* AI Section */}
-            <section className="section-padding" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)' }}>
+            <section style={{ padding: '100px 0', background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)' }}>
                 <div className="max-container reveal">
                     <div style={{ textAlign: 'center', marginBottom: '64px' }}>
                         <span style={{ display: 'inline-block', background: 'rgba(96,165,250,0.15)', color: '#60a5fa', padding: '6px 16px', borderRadius: '30px', fontWeight: '700', fontSize: '13px', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '1px' }}>AI Intelligence</span>
-                        <h2 style={{ fontSize: 'clamp(32px, 5vw, 44px)', fontWeight: '900', color: 'white', marginBottom: '16px', letterSpacing: '-0.02em' }}>Built-In AI — Not Bolted On</h2>
+                        <h2 style={{ fontSize: '44px', fontWeight: '900', color: 'white', marginBottom: '16px', letterSpacing: '-0.02em' }}>Built-In AI — Not Bolted On</h2>
                         <p style={{ fontSize: '18px', color: '#94a3b8', maxWidth: '700px', margin: '0 auto', lineHeight: '1.7' }}>Every AI feature is part of the core VSDOX platform, available on-premise or cloud — no external AI API dependency.</p>
                     </div>
-                    <div className="four-col-grid">
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
                         {aiHighlights.map((ai, i) => (
                             <div key={i} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '28px', textAlign: 'center', transition: 'all 0.3s ease', cursor: 'default' }}
                                 onMouseEnter={e => { e.currentTarget.style.background = 'rgba(29,99,237,0.15)'; e.currentTarget.style.borderColor = 'rgba(29,99,237,0.4)'; }}
@@ -302,14 +303,14 @@ export const Products = () => {
             </section>
 
             {/* Deployment */}
-            <section className="section-padding" style={{ background: 'white' }}>
+            <section style={{ padding: '100px 0', background: 'white' }}>
                 <div className="max-container reveal">
                     <div style={{ textAlign: 'center', marginBottom: '64px' }}>
                         <span style={{ display: 'inline-block', background: 'rgba(29,99,237,0.08)', color: '#1d63ed', padding: '6px 16px', borderRadius: '30px', fontWeight: '700', fontSize: '13px', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '1px' }}>Deployment Flexibility</span>
-                        <h2 style={{ fontSize: 'clamp(32px, 5vw, 44px)', fontWeight: '900', color: '#0f172a', marginBottom: '16px', letterSpacing: '-0.02em' }}>Deploy Your Way</h2>
+                        <h2 style={{ fontSize: '44px', fontWeight: '900', color: '#0f172a', marginBottom: '16px', letterSpacing: '-0.02em' }}>Deploy Your Way</h2>
                         <p style={{ fontSize: '18px', color: '#64748b', maxWidth: '700px', margin: '0 auto', lineHeight: '1.7' }}>VSDOX is architected for maximum deployment flexibility — built on high-availability, containerized, and modular infrastructure.</p>
                     </div>
-                    <div className="three-col-grid">
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
                         {deploymentOptions.map((opt, i) => (
                             <div key={i} style={{ background: '#f8fafc', borderRadius: '20px', padding: '40px', border: '1px solid #e2e8f0', textAlign: 'center', transition: 'all 0.3s ease' }}
                                 onMouseEnter={e => { e.currentTarget.style.borderColor = opt.color; e.currentTarget.style.background = 'white'; e.currentTarget.style.boxShadow = `0 20px 40px rgba(0,0,0,0.08)`; e.currentTarget.style.transform = 'translateY(-6px)'; }}
@@ -401,61 +402,56 @@ export const Industries = () => {
                 subtitle="Tailored document strategies for every sector and scale."
                 bgImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2340&auto=format&fit=crop"
             />
-            <div className="max-container reveal" style={{ padding: 'clamp(40px, 8vw, 80px) 0' }}>
+            <div className="max-container reveal" style={{ padding: '80px 0' }}>
                 <div className="industry-grid-detailed">
                     <div className="industry-block">
                         <div className="icon-main" style={{ color: 'var(--primary)' }}><i className="fas fa-building"></i></div>
-                        <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '16px' }}>Corporate</h3>
+                        <h3>Corporate</h3>
                         <ul className="dot-list">
                             <li><strong>HR:</strong> Employee docs & employment policies</li>
                             <li><strong>Secretarial:</strong> Shareholder & Investor documents</li>
                             <li><strong>Functions:</strong> R&D, Finance, & CX content</li>
                         </ul>
-                        <Link to="/industries/corporate" className="link-more" style={{ marginTop: '16px', display: 'inline-block' }}>Explore Corporate CMS →</Link>
                     </div>
                     <div className="industry-block">
                         <div className="icon-main" style={{ color: 'var(--primary)' }}><i className="fas fa-university"></i></div>
-                        <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '16px' }}>BFSI</h3>
+                        <h3>BFSI</h3>
                         <ul className="dot-list">
                             <li><strong>Banking:</strong> Account opening & commercial lending</li>
                             <li><strong>Insurance:</strong> New policies & policy servicing</li>
                             <li><strong>Management:</strong> Claims & service requests</li>
                         </ul>
-                        <Link to="/industries/banking-bfsi" className="link-more" style={{ marginTop: '16px', display: 'inline-block' }}>Explore BFSI Solution →</Link>
                     </div>
                     <div className="industry-block">
                         <div className="icon-main" style={{ color: 'var(--primary)' }}><i className="fas fa-landmark"></i></div>
-                        <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '16px' }}>Government</h3>
+                        <h3>Government</h3>
                         <ul className="dot-list">
                             <li><strong>Judiciary:</strong> Case File Digitization & e-Filing</li>
                             <li><strong>Ministries:</strong> Automation & grant management</li>
                             <li><strong>Public:</strong> Citizens records repositories</li>
                         </ul>
-                        <Link to="/industries/government" className="link-more" style={{ marginTop: '16px', display: 'inline-block' }}>Explore Gov Solution →</Link>
                     </div>
                     <div className="industry-block">
                         <div className="icon-main" style={{ color: 'var(--primary)' }}><i className="fas fa-graduation-cap"></i></div>
-                        <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '16px' }}>Education</h3>
+                        <h3>Education</h3>
                         <ul className="dot-list">
                             <li><strong>Libraries:</strong> Research, Journals, & Archives</li>
                             <li><strong>Institutions:</strong> Subject Text Repositories</li>
                             <li><strong>Access:</strong> Managed student records portal</li>
                         </ul>
-                        <Link to="/industries/education" className="link-more" style={{ marginTop: '16px', display: 'inline-block' }}>Explore e-Library →</Link>
                     </div>
                     <div className="industry-block">
                         <div className="icon-main" style={{ color: 'var(--primary)' }}><i className="fas fa-hospital"></i></div>
-                        <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '16px' }}>Healthcare</h3>
+                        <h3>Healthcare</h3>
                         <ul className="dot-list">
                             <li><strong>Records:</strong> Patient records digitization</li>
                             <li><strong>Appointments:</strong> Easy access management</li>
                             <li><strong>Claims:</strong> Insurance history & history tracking</li>
                         </ul>
-                        <Link to="/industries/healthcare" className="link-more" style={{ marginTop: '16px', display: 'inline-block' }}>Explore Digital Health →</Link>
                     </div>
                     <div className="industry-block" style={{ background: 'var(--primary)', color: 'white' }}>
                         <div className="icon-main" style={{ color: 'white' }}><i className="fas fa-rocket"></i></div>
-                        <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '16px' }}>Startups</h3>
+                        <h3>Startups</h3>
                         <p style={{ color: 'rgba(255,255,255,0.9)' }}>Scaling with expansive dreams? Move your documentation to a secure, cloud-ready environment today.</p>
                     </div>
                 </div>
@@ -477,17 +473,17 @@ export const Resources = () => (
                 <div className="feature-small-card">
                     <h4>Technical Docs</h4>
                     <p>Full API documentation and setup guides for developers.</p>
-                    <Link to="/contact" className="link-more">Request Docs →</Link>
+                    <Link to="#" className="link-more">Access Docs →</Link>
                 </div>
                 <div className="feature-small-card">
                     <h4>Case Studies</h4>
                     <p>Learn how Hero Motocorp saved 40% on operational costs.</p>
-                    <Link to="/case-studies" className="link-more">Read Stories →</Link>
+                    <Link to="#" className="link-more">Read Stories →</Link>
                 </div>
                 <div className="feature-small-card">
                     <h4>Help Center</h4>
                     <p>24/7 ticket support and community knowledge base.</p>
-                    <Link to="/contact" className="link-more">Get Support →</Link>
+                    <Link to="#" className="link-more">Get Support →</Link>
                 </div>
             </div>
         </section>
@@ -495,6 +491,56 @@ export const Resources = () => (
     </>
 );
 
+export const Pricing = () => (
+    <>
+        <div style={{ background: 'var(--section-alt)', paddingBottom: '100px' }}>
+            <PageHero
+                title="Pricing Plans"
+                subtitle="Flexible options for growing businesses and enterprises."
+                bgImage="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2340&auto=format&fit=crop"
+            />
+            <div className="max-container reveal" style={{ marginTop: '-60px' }}>
+                <div className="pricing-grid">
+                    <div className="pricing-card">
+                        <h5>Standard</h5>
+                        <div className="price">$49<span>/mo</span></div>
+                        <ul>
+                            <li>Up to 10,000 Documents</li>
+                            <li>Basic Workflow Engine</li>
+                            <li>5 User Accounts</li>
+                            <li>Standard Support</li>
+                        </ul>
+                        <button className="btn-outline">Choose Plan</button>
+                    </div>
+                    <div className="pricing-card featured">
+                        <div className="popular-tag">Most Popular</div>
+                        <h5>Professional</h5>
+                        <div className="price">$199<span>/mo</span></div>
+                        <ul>
+                            <li>Up to 500,000 Documents</li>
+                            <li>Advanced AI Capture</li>
+                            <li>25 User Accounts</li>
+                            <li>Priority 24/7 Support</li>
+                        </ul>
+                        <button className="btn-primary">Choose Plan</button>
+                    </div>
+                    <div className="pricing-card">
+                        <h5>Enterprise</h5>
+                        <div className="price">Custom</div>
+                        <ul>
+                            <li>Unlimited Documents</li>
+                            <li>Full API Access</li>
+                            <li>Unlimited Users</li>
+                            <li>Dedicated Success Manager</li>
+                        </ul>
+                        <button className="btn-outline">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </>
+);
 
 export const Contact = () => {
     useEffect(() => {
@@ -511,7 +557,7 @@ export const Contact = () => {
         e.preventDefault();
         setSending(true);
         setError(false);
-        const success = await handleFormSubmission(formData, 'corp@virsoftech.com');
+        const success = await handleFormSubmission(formData, DEFAULTS.recipientEmail);
         if (success) {
             setSubmitted(true);
         } else {
@@ -527,32 +573,32 @@ export const Contact = () => {
                 subtitle="Get in touch with our document management experts."
                 bgImage="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=2340&auto=format&fit=crop"
             />
-            <section className="max-container reveal" style={{ padding: '80px 0' }}>
+            <section className="max-container reveal contact-section">
                 <div className="contact-page-grid">
                     <div className="contact-form-wrapper glass-card">
                         {submitted ? (
-                            <div style={{ textAlign: 'center', padding: '40px 0' }}>
-                                <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
-                                <h3 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '12px' }}>Message Sent!</h3>
-                                <p style={{ color: 'var(--text-muted)' }}>Thank you for reaching out. We'll get back to you shortly.</p>
-                                <button onClick={() => setSubmitted(false)} className="btn-primary" style={{ marginTop: '20px' }}>Send Another</button>
+                            <div className="contact-success">
+                                <div className="contact-success-icon"><i className="fas fa-check-circle"></i></div>
+                                <h3 className="contact-success-title">Message Sent!</h3>
+                                <p className="contact-success-message">Thank you for reaching out. We'll get back to you shortly.</p>
+                                <button onClick={() => setSubmitted(false)} className="btn-primary contact-success-action">Send Another</button>
                             </div>
                         ) : (
                             <>
                                 <h3>Send us a Message</h3>
                                 {error && (
-                                    <div style={{ background: '#fef2f2', border: '1px solid #fecaca', color: '#991b1b', padding: '12px 16px', borderRadius: '8px', marginBottom: '20px', fontSize: '14px' }}>
+                                    <div className="contact-error-box">
                                         Oops! Something went wrong. Please try again.
                                     </div>
                                 )}
                                 <form className="contact-form" onSubmit={handleSubmit}>
-                                    <div className="form-row">
+                                    <div className="contact-form-row">
                                         <input name="name" type="text" placeholder="Full Name" value={formData.name} onChange={handleChange} required />
                                         <input name="email" type="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
                                     </div>
                                     <input name="subject" type="text" placeholder="Subject" value={formData.subject} onChange={handleChange} required />
                                     <textarea name="message" placeholder="Your Message" rows="6" value={formData.message} onChange={handleChange} required></textarea>
-                                    <button type="submit" className="btn-primary" disabled={sending} style={{ opacity: sending ? 0.7 : 1, cursor: sending ? 'wait' : 'pointer' }}>
+                                    <button type="submit" className="btn-primary contact-submit-btn" disabled={sending}>
                                         {sending ? 'Sending...' : 'Send Message'}
                                     </button>
                                 </form>
@@ -572,11 +618,11 @@ export const Contact = () => {
                         </div>
                         <div className="contact-box glass-card">
                             <h4>Phone & Email</h4>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                <p style={{ margin: 0 }}><strong>Toll-Free:</strong> <a href="tel:18005717711">18005717711</a></p>
-                                <p style={{ margin: 0 }}><strong>Landline:</strong> <a href="tel:01204325497">0120 - 4325 497</a></p>
-                                <p style={{ margin: 0 }}><strong>WhatsApp:</strong> <a href="https://wa.me/919319086751" target="_blank" rel="noopener noreferrer">9319086751</a></p>
-                                <p style={{ margin: 0 }}><strong>Email:</strong> <a href="mailto:corp@virsoftech.com">corp@virsoftech.com</a></p>
+                            <div className="contact-details">
+                                <p><strong>Toll-Free:</strong> <a href={LINKS.telTollFree}>{APP_CONTACT.tollFree}</a></p>
+                                <p><strong>Landline:</strong> <a href={LINKS.telLandline}>{APP_CONTACT.landline}</a></p>
+                                <p><strong>WhatsApp:</strong> <a href={LINKS.whatsapp} target="_blank" rel="noopener noreferrer">{APP_CONTACT.whatsapp}</a></p>
+                                <p><strong>Email:</strong> <a href={LINKS.mailToRecipient}>{APP_CONTACT.recipientEmail}</a></p>
                             </div>
                         </div>
                         <div className="contact-box glass-card">
@@ -676,7 +722,7 @@ export const About = () => {
             role: "Vice President – Sales",
             img: "https://www.virsoftech.com/img/manu-photo.jpg?v=1",
             linkedin: "https://www.linkedin.com/in/manu-paliwal-159b324/",
-            email: "corp@virsoftech.com",
+            email: APP_CONTACT.recipientEmail,
             desc: "Driving growth strategy, differentiated customer value, and expanding business reach with digital solutions. With over 25 years of experience in sales, marketing, and strategic alliances, Manu has delivered turnaround results in challenging business situations. Previously he held P&L leadership roles at global companies including President – Business Solutions for Sharp."
         }
     ];
@@ -689,12 +735,12 @@ export const About = () => {
                 bgImage={teamBanner}
             />
 
-            <section className="section-padding max-container reveal">
-                <div className="two-col-grid">
+            <section className="section max-container reveal" style={{ padding: '80px 0' }}>
+                <div className="section-info">
                     <div className="info-text">
                         <span className="info-tag">WHO WE ARE</span>
-                        <h2 style={{ fontSize: 'clamp(28px, 5vw, 36px)', fontWeight: '800', marginBottom: '20px' }}>Revolutionizing IT Process Transformation</h2>
-                        <p style={{ textAlign: 'justify' }}>
+                        <h2>Revolutionizing IT Process Transformation</h2>
+                        <p>
                             Vir Softech is at the forefront of the revolution in business-led IT process transformation. We assist our customers in realizing their vision and scaling up through workflow transformations that produce superior business results at the lowest possible cost and in the shortest amount of time.
                         </p>
                         <p>
@@ -708,11 +754,11 @@ export const About = () => {
                         </ul>
                     </div>
                     <div className="info-image">
-                        <div className="glass-card image-wrapper" style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'clamp(20px, 5vw, 40px)' }}>
-                            <h3 style={{ marginBottom: '20px', color: 'var(--primary)', fontSize: '24px', fontWeight: '800' }}>Global Impact</h3>
+                        <div className="glass-card image-wrapper" style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '40px' }}>
+                            <h3 style={{ marginBottom: '20px', color: 'var(--primary)' }}>Global Impact</h3>
                             <p style={{ marginBottom: '10px' }}><strong>CAGR:</strong> 40% per annum</p>
                             <p style={{ marginBottom: '10px' }}><strong>Presence:</strong> US, UK, Japan, Australia, India</p>
-                            <p style={{ margin: 0 }}><strong>Clients:</strong> Fortune 500, Govt, BFSI, Judiciary, Corporate, Health & Education</p>
+                            <p><strong>Clients:</strong> Fortune 500, Govt, BFSI,Judiciary,Corporate, Health & Education</p>
                         </div>
                     </div>
                 </div>
@@ -735,11 +781,11 @@ export const About = () => {
                 </div>
             </section>
 
-            <section className="section-padding" style={{ background: '#f8fafc' }}>
+            <section style={{ padding: '80px 0', background: '#f8fafc' }}>
                 <div className="max-container reveal">
                     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
                         <span className="info-tag">OUR TEAM</span>
-                        <h2 style={{ fontSize: 'clamp(32px, 5vw, 42px)', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '16px' }}>Leadership at Vir Softech</h2>
+                        <h2 style={{ fontSize: '42px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '16px' }}>Leadership at Vir Softech</h2>
                         <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '18px', lineHeight: '1.6', color: 'var(--text-muted)' }}>
                             A few passionate technologists behind world's foremost enterprise Imaging and Print products formed Vir Softech in Nov 2015. With time the team has expanded to include brilliant product engineers, research scientists, programmers, workflow engineers, data scientists, marketing executives, and dev-ops experts.
                         </p>
@@ -772,3 +818,4 @@ export const About = () => {
         </>
     );
 };
+
