@@ -42,6 +42,65 @@ export const CompanyPageHero = ({ tag, title, subtitle, bgImage }) => (
    ═══════════════════════════════════════════════════════════ */
 const caseStudies = [
     {
+        tag: 'GOVERNMENT',
+        tagColor: '#dc2626',
+        client: 'Ministry of Health & Family Welfare – Government of Meghalaya',
+        logo: 'fa-file-medical',
+        title: 'AI-Powered Document Management for Health Department',
+        challenge: 'The Ministry of Health & Family Welfare, Meghalaya manages a large volume of legacy administrative and healthcare records accumulated over decades. Most records were paper-based, leading to slow retrieval, manual dependency, and operational inefficiencies. The department required a scalable solution to digitize historical records without disrupting daily operations while ensuring secure on-promise storage. Additionally, they needed AI-powered capabilities for natural language querying and quick summarization of documents to support faster policy and administrative decision-making.',
+        solution: 'Virsoftech implemented an AI-powered Document Management System (DMS) tailored for government workflows, enabling large-scale digitization, structured indexing, and secure archival of legacy documents. The solution was deployed on-premise within the ministry’s data center to ensure data security and compliance. It offers multi-modal search through metadata, full-text, keyword, and semantic search, along with an in-house RAG-based AI module that enables natural language queries, contextual insights, and automated document summarization within a secure internal environment.',
+        results: [
+            'Digitized and indexed 3+ million legacy government documents into a centralized digital repository',
+            'Reduced document retrieval time by over 85% through advanced AI-powered search',
+            'Enabled secure on-premise document management within the department’s data center',
+            'Implemented AI-based summarization and contextual querying for faster policy analysis',
+            'Achieved significant reduction in manual record handling and improved departmental efficiency',
+            'Enabled intelligent document discovery through semantic and NLP-based search capabilities'
+        ],
+        industry: 'Government / Healthcare',
+        tech: 'Java, Spring Boot, PostgreSQL, Hibernate, Angular, RAG, AI'
+    },
+    {
+        tag: 'GOVERNMENT',
+        tagColor: '#dc2626',
+        client: 'IGR e-Registration – Government Land Records',
+        logo: 'fa-map-location-dot',
+        title: 'Workflow-Based Land Record Management System',
+        challenge: 'The IGR e-Registration department manages large volumes of land and property registration documents across SR, DSR, and IGR offices. Ensuring accurate verification of details such as property information, party names, and registration metadata was challenging due to manual processes, leading to delays and limited traceability. The department required a structured digital workflow to enable multi-level verification, controlled corrections, and full auditability before securely storing records in a centralized repository.',
+        solution: 'Virsoftech implemented a workflow-based Document Management System (DMS) to enable hierarchical verification and correction of land records. Digitized documents from SR and DSR offices pass through a configurable multi-level review process where reviewers validate content and metadata. Rejected records are corrected by designated modifiers and resubmitted until compliant. The system maintains complete audit logs of all actions, ensuring transparency, accountability, and secure storage of verified land records in a centralized repository.',
+        results: [
+            'Digitized and processed 2+ million land and property registration documents',
+            'Implemented hierarchical verification workflow across SR, DSR, and IGR offices',
+            'Modifiers to resolve errors at SR and DSR level',
+            'Reduced manual verification effort by 70%',
+            'Achieved 100% audit traceability for document review, modification, and approvals',
+            'Improved metadata accuracy for property and party details through structured validation',
+            'Enabled secure centralized repository for verified land records'
+        ],
+        industry: 'Government / Land Records',
+        tech: 'Java, Spring Boot, Hibernate, Angular, PostgreSQL'
+    },
+    {
+        tag: 'JUDICIARY',
+        tagColor: '#7c3aed',
+        client: 'High Court & District Court Digital Records Management',
+        logo: 'fa-scale-balanced',
+        title: 'Intelligent DMS & AI Tools for Judiciary',
+        challenge: 'Courts handle large volumes of case files and legal documents across multiple district courts, often stored in physical form or scattered systems, making retrieval slow and inefficient. Additionally, courts generate large volumes of hearings daily, making manual transcription and document analysis time-consuming. The judiciary required a centralized, secure system to manage records while adding AI capabilities to automate speech transcription, document understanding, and information retrieval.',
+        solution: 'Implemented an open-source based DMS offering advanced indexing and multi-modal search (free-text, phonetic, fuzzy). Integrated a three-level verification workflow and automatic synchronization between District and High Courts. The platform includes AI-driven speech-to-text transcription, transliteration, and translation for court records. A RAG-based AI module powered by open-source LLMs supports natural language queries and contextual insights, deployed fully on-premise for maximum data security.',
+        results: [
+            'Centralized management of millions of court case documents across 100+ District Courts',
+            'Reduced document search time by 80% through advanced AI-powered search',
+            'Automated speech-to-text transcription for court hearings and proceedings',
+            'Enabled multilingual transliteration and translation for legal documents',
+            'Reduced document analysis time through AI-powered summarization',
+            'Enabled natural language querying of court documents using RAG-based AI',
+            'Ensured secure on-premise AI deployment without external data exposure'
+        ],
+        industry: 'Judiciary',
+        tech: 'Java, Spring Boot, Hibernate, React/Angular, PostgreSQL, RAG, AI, Vector DB, LLM'
+    },
+    {
         tag: 'JUDICIARY',
         tagColor: '#7c3aed',
         client: 'Multiple State and District Courts',

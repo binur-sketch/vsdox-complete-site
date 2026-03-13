@@ -201,65 +201,52 @@ export const Healthcare = () => {
         <>
             <PageHero
                 tag="INDUSTRY SOLUTION · HEALTHCARE"
-                title="Digital Healthcare Knowledge & Regulatory Document Management"
-                subtitle="Centralize pharmacopoeia standards, regulatory publications, laboratory methods, and healthcare documentation in a secure, searchable digital repository."
+                title="Secure Patient Records & Clinical Document Management"
+                subtitle="Digitize patient files, streamline clinical operations, and ensure HIPAA-compliant document handling across hospitals, clinics, and insurance providers."
                 bgImage="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2400&auto=format&fit=crop"
             />
 
             <StatsStrip stats={[
-                { value: '1M+', label: 'Healthcare Documents Managed' },
-                { value: '90%', label: 'Faster Knowledge Discovery' },
-                { value: '100%', label: 'Secure Access Control' },
-                { value: '70%', label: 'Reduced Manual Documentation' }
+                { value: '5M+', label: 'Patient Records Digitized' },
+                { value: '85%', label: 'Faster Record Retrieval' },
+                { value: '100%', label: 'HIPAA Compliance Ready' },
+                { value: '60%', label: 'Reduced Paper Storage Cost' }
             ]} />
 
             <section style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', padding: '100px 0' }}>
                 <div className="max-container">
                     <div style={{ textAlign: 'center', marginBottom: '60px' }} className="reveal">
                         <span className="info-tag" style={{ background: 'rgba(29,99,237,0.15)', color: '#60a5fa', border: '1px solid rgba(29,99,237,0.2)' }}>Platform Capabilities</span>
-                        <h2 style={{ fontSize: 'clamp(26px, 3vw, 40px)', fontWeight: '800', color: 'white', margin: '20px 0' }}>Healthcare Knowledge Management Platform</h2>
-                        <p style={{ color: '#94a3b8', maxWidth: '700px', margin: '0 auto', fontSize: '17px' }}>Digitally manage pharmaceutical standards, research publications, and healthcare documentation through a structured repository.</p>
+                        <h2 style={{ fontSize: 'clamp(26px, 3vw, 40px)', fontWeight: '800', color: 'white', margin: '20px 0' }}>Intelligent Healthcare Document Platform</h2>
+                        <p style={{ color: '#94a3b8', maxWidth: '700px', margin: '0 auto', fontSize: '17px' }}>From patient intake to discharge summaries, manage every clinical document securely and efficiently.</p>
                     </div>
-
                     <FeatureGrid features={[
-                        { icon: 'fa-book-medical', title: 'Pharmacopoeia Content Repository', desc: 'Manage pharmacopoeia editions, monographs, appendices, and laboratory standards within a structured digital knowledge base.' },
-
-                        { icon: 'fa-file-lines', title: 'Healthcare Document Digitization', desc: 'Convert legacy medical publications, research papers, and regulatory documents into searchable digital assets.' },
-
-                        { icon: 'fa-layer-group', title: 'Structured Content Organization', desc: 'Organize healthcare knowledge into hierarchical sections such as volumes, chapters, monographs, and reference tables.' },
-
-                        { icon: 'fa-magnifying-glass', title: 'Advanced Medical Search', desc: 'Enable fast discovery of healthcare information using full-text search, metadata filters, and intelligent indexing.' },
-
-                        { icon: 'fa-shield-halved', title: 'Secure Access & Role Management', desc: 'Control access to sensitive medical and regulatory documents with role-based permissions and secure authentication.' },
-
-                        { icon: 'fa-code-branch', title: 'Content Version & Update Management', desc: 'Track document revisions, addendums, and corrections while maintaining complete version history of healthcare standards.' },
+                        { icon: 'fa-notes-medical', title: 'Patient Record Management', desc: 'Centralized, searchable repository for patient histories, lab results, imaging reports, and discharge summaries.' },
+                        { icon: 'fa-file-medical', title: 'Clinical Document Digitization', desc: 'Convert paper-based clinical records to structured digital formats with multilingual OCR and AI extraction.' },
+                        { icon: 'fa-hospital', title: 'Insurance Claims Processing', desc: 'Automate claim submission workflows with intelligent document validation and status tracking.' },
+                        { icon: 'fa-user-doctor', title: 'Appointment & Referral Docs', desc: 'Digitize referral letters, prescriptions, and appointment records for seamless care coordination.' },
+                        { icon: 'fa-shield-halved', title: 'HIPAA & Data Security', desc: 'Role-based access, audit logs, and encrypted storage to protect sensitive patient health information.' },
+                        { icon: 'fa-qrcode', title: 'QR-Code Patient Records', desc: 'Enable secure, instant access to patient records via unique QR codes at point of care.' },
                     ]} />
                 </div>
             </section>
 
             <BenefitsList
-                title="Empowering Healthcare Knowledge Access"
-                desc="Healthcare institutions and regulatory bodies can manage critical pharmaceutical and medical documentation more efficiently through a centralized digital repository."
+                title="Transforming Patient Care Through Digital Records"
+                desc="Healthcare organizations using VSDOX improve care quality by having the right documents at the right time — securely, efficiently, and in compliance."
                 benefits={[
-                    { icon: 'fa-bolt', title: 'Instant Knowledge Retrieval', desc: 'Quickly access healthcare standards, research publications, and regulatory guidelines through powerful search tools.' },
-
-                    { icon: 'fa-database', title: 'Centralized Knowledge Repository', desc: 'Maintain all healthcare documentation in one secure platform for consistent access and governance.' },
-
-                    { icon: 'fa-chart-line', title: 'Improved Research Productivity', desc: 'Enable researchers and professionals to access verified healthcare information faster.' },
-
-                    { icon: 'fa-leaf', title: 'Paperless Healthcare Documentation', desc: 'Digitize large volumes of medical publications and eliminate dependency on physical archives.' },
+                    { icon: 'fa-bolt', title: 'Instant Record Access', desc: 'Retrieve any patient record in seconds with full-text and metadata search.' },
+                    { icon: 'fa-hospital-user', title: 'Improved Patient Safety', desc: 'Reduce medical errors with accurate, always-accessible patient history.' },
+                    { icon: 'fa-money-bill-wave', title: 'Faster Insurance Reimbursement', desc: 'Automate claims documentation to reduce reimbursement timelines by 60%.' },
+                    { icon: 'fa-leaf', title: 'Paperless Hospital', desc: 'Eliminate paper-based workflows and reduce storage costs significantly.' },
                 ]}
             />
 
-            <CTABanner
-                title="Modernize Your Healthcare Knowledge Repository"
-                subtitle="Empower researchers, regulators, and healthcare professionals with secure and instant access to critical medical information."
-            />
+            <CTABanner title="Digitize Your Healthcare Records Today" subtitle="Trusted by hospitals, clinics, and health insurers across India. Let's transform your care delivery." />
 
         </>
     );
 };
-
 /* ═══════════════════════════════════════════════════════════
    Corporate
    ═══════════════════════════════════════════════════════════ */
