@@ -180,7 +180,7 @@ const AdminDashboard = ({ onClose }) => {
       )}
 
       <header className="admin-dashboard-header">
-        <img src={logo} alt="VSDox" className="admin-dashboard-logo" />
+        <img src={logo} alt="VSDOX – AI-Powered Enterprise Content Management Admin Dashboard" className="admin-dashboard-logo" />
         <strong>Blog Admin</strong>
         <span className="admin-dashboard-user"><i className="fas fa-user" aria-hidden="true"></i> {user.name}</span>
         {onClose && (

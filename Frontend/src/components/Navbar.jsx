@@ -98,7 +98,7 @@ const Navbar = () => {
     return (
         <nav className="navbar" ref={navRef}>
             <Link to="/" className="nav-logo" onClick={closeMenu}>
-                <img src={logo} alt="VsDox" style={{ height: '40px' }} />
+                <img src={logo} alt="VSDOX – Enterprise Content Management Platform by Vir Softech" style={{ height: '40px' }} />
             </Link>
 
             {/* Desktop Nav Links */}

@@ -7,56 +7,49 @@ const SEO = ({ title, description, keywords, canonical }) => {
             document.title = title;
         }
 
-        // Update meta description
-        let metaDescription = document.querySelector('meta[name="description"]');
-        if (metaDescription) {
-            metaDescription.setAttribute('content', description || '');
-        } else if (description) {
-            metaDescription = document.createElement('meta');
-            metaDescription.name = 'description';
-            metaDescription.content = description;
-            document.head.appendChild(metaDescription);
-        }
-
-        // Update meta keywords
-        let metaKeywords = document.querySelector('meta[name="keywords"]');
-        if (metaKeywords) {
-            metaKeywords.setAttribute('content', keywords || '');
-        } else if (keywords) {
-            metaKeywords = document.createElement('meta');
-            metaKeywords.name = 'keywords';
-            metaKeywords.content = keywords;
-            document.head.appendChild(metaKeywords);
-        }
-
-        // Update canonical link
-        let linkCanonical = document.querySelector('link[rel="canonical"]');
-        if (linkCanonical) {
-            linkCanonical.setAttribute('href', canonical || window.location.href);
-        } else {
-            linkCanonical = document.createElement('link');
-            linkCanonical.rel = 'canonical';
-            linkCanonical.href = canonical || window.location.href;
-            document.head.appendChild(linkCanonical);
-        }
-
-        // OG Tags (Standard for modern SEO)
-        const updateOGTag = (property, content) => {
-            let tag = document.querySelector(`meta[property="${property}"]`);
-            if (tag) {
-                tag.setAttribute('content', content);
-            } else {
+        const updateMetaTag = (selector, attr, content, isProperty = false) => {
+            let tag = document.querySelector(selector);
+            if (!tag && content) {
                 tag = document.createElement('meta');
-                tag.setAttribute('property', property);
-                tag.setAttribute('content', content);
+                if (isProperty) {
+                    tag.setAttribute('property', attr);
+                } else {
+                    tag.name = attr;
+                }
                 document.head.appendChild(tag);
+            }
+            if (tag && content) {
+                tag.setAttribute('content', content);
             }
         };
 
-        updateOGTag('og:title', title || 'VSDOX - Document Management');
-        updateOGTag('og:description', description || '');
-        updateOGTag('og:type', 'website');
-        updateOGTag('og:url', window.location.href);
+        updateMetaTag('meta[name="description"]', 'description', description);
+        updateMetaTag('meta[name="keywords"]', 'keywords', keywords);
+
+        // OG Tags
+        updateMetaTag('meta[property="og:title"]', 'og:title', title, true);
+        updateMetaTag('meta[property="og:description"]', 'og:description', description, true);
+        updateMetaTag('meta[property="og:type"]', 'og:type', 'website', true);
+        updateMetaTag('meta[property="og:url"]', 'og:url', window.location.href, true);
+        updateMetaTag('meta[property="og:image"]', 'og:image', '/og-image.png', true); // Ensure this exists or use a prop
+
+        // Twitter Tags
+        updateMetaTag('meta[name="twitter:card"]', 'twitter:card', 'summary_large_image');
+        updateMetaTag('meta[name="twitter:title"]', 'twitter:title', title);
+        updateMetaTag('meta[name="twitter:description"]', 'twitter:description', description);
+        updateMetaTag('meta[name="twitter:image"]', 'twitter:image', '/og-image.png');
+
+        // Update canonical link
+        let linkCanonical = document.querySelector('link[rel="canonical"]');
+        const canonicalUrl = canonical || window.location.href;
+        if (linkCanonical) {
+            linkCanonical.setAttribute('href', canonicalUrl);
+        } else {
+            linkCanonical = document.createElement('link');
+            linkCanonical.rel = 'canonical';
+            linkCanonical.href = canonicalUrl;
+            document.head.appendChild(linkCanonical);
+        }
 
     }, [title, description, keywords, canonical]);
 

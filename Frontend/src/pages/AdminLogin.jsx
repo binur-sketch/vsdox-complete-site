@@ -125,9 +125,9 @@ const AdminLogin = () => {
 
         {mode === 'login' && (
           <div className="admin-login-header">
-            <img src={logo} alt="VsDox" className="admin-login-logo" />
-            <h1>Welcome back</h1>
-            <p>Sign in to your VSDox admin account</p>
+            <img src={logo} alt="VSDOX – Admin Portal | Enterprise Content Management" className="admin-login-logo" />
+            <h1>Admin Portal Login</h1>
+            <p>Secure access to your VSDOX administration services</p>
           </div>
         )}
 

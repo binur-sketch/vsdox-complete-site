@@ -44,7 +44,7 @@ const DigitizationServices = () => {
             <SEO
                 title="Multimedia & Heritage Digitization Services – Archives & Document Scanning | VSDOX"
                 description="Professional digitization of rare manuscripts, audiovisual archives, microfilm, and large-format maps. Expert non-invasive scanning & long-term digital preservation by Vir Softech."
-                keywords="heritage digitization, document scanning India, manuscript digitization, microfilm conversion, audiovisual digitization, archival scanning services"
+                keywords="heritage digitization, document scanning India, manuscript digitization, microfilm conversion, audiovisual digitization, archival scanning services, DMS, Document Management System, ECM, Enterprise Content Management System, AI-powered document management, Secure ECM, Scalable Enterprise Content Management, Intelligent capture, Seamless integration, Lifecycle automation, Advanced search, Digital operations, Content platform, Cloud-based centralized repository, Version control, Auditability, Approval workflows, Electronic DMS, Workflow automation, Records Management, Content lifecycle management, Document classification, Digital preservation"
             />
             <PageHero
                 tag="SPECIALIZED SERVICES"
@@ -77,7 +77,7 @@ const DigitizationServices = () => {
                             </ul>
                         </div>
                         <div className="reveal" style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
-                            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2400&auto=format&fit=crop" alt="Digital Archive" />
+                            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2400&auto=format&fit=crop" alt="High-resolution scanning of historical books for digital preservation and archival" />
                         </div>
                     </div>
                 </div>

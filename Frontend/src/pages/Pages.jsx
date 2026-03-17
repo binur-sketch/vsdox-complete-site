@@ -192,7 +192,7 @@ export const Products = () => {
             <SEO
                 title="VSDOX Platform – Enterprise Content Management System | DMS Features"
                 description="Explore VSDOX's complete ECM platform: DMS, AI-powered search, workflow automation, capture digitization, security & compliance — all in one open-source solution."
-                keywords="VSDOX features, ECM platform, DMS features, document workflow automation, AI search, enterprise content management India"
+                keywords="VSDOX features, ECM platform, DMS features, document workflow automation, AI search, enterprise content management India, DMS, Document Management System, ECM, Enterprise Content Management System, AI-powered document management, Secure ECM, Scalable Enterprise Content Management, Intelligent capture, Seamless integration, Lifecycle automation, Advanced search, Digital operations, Content platform, Cloud-based centralized repository, Version control, Auditability, Approval workflows, Electronic DMS, Records Management, Content lifecycle management, API integration, Document classification"
             />
             {/* Hero */}
             <PageHero
@@ -246,7 +246,7 @@ export const Products = () => {
                         </div>
                         <div style={{ position: 'relative' }}>
                             <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 40px 80px -20px rgba(0,0,0,0.2)', border: '1px solid #e2e8f0' }}>
-                                <img src="./src/assets/dashboard.png" alt="VSDOX Dashboard" style={{ width: '100%', height: '420px', objectFit: 'cover' }} />
+                                <img src="./src/assets/dashboard.png" alt="VSDOX AI-Powered Enterprise Content Management Dashboard Interface" style={{ width: '100%', height: '420px', objectFit: 'cover' }} />
                             </div>
                             <div style={{ position: 'absolute', bottom: '-24px', left: '-24px', background: '#1d63ed', color: 'white', padding: '20px 28px', borderRadius: '16px', boxShadow: '0 10px 30px rgba(29,99,237,0.4)' }}>
                                 <div style={{ fontSize: '28px', fontWeight: '900' }}>200M+</div>
@@ -381,7 +381,7 @@ export const Solutions = () => {
             <SEO
                 title="Enterprise ECM Solutions – Digitization, BPM & Automation | VSDOX"
                 description="VSDOX enterprise solutions include multimedia heritage digitization, native BPM process automation, and omnichannel content management for complex workflows."
-                keywords="enterprise document solutions, document digitization, BPM automation, heritage digitization, ECM solutions India"
+                keywords="enterprise document solutions, document digitization, BPM automation, heritage digitization, ECM solutions India, DMS, Document Management System, ECM, Enterprise Content Management System, AI-powered document management, Secure ECM, Scalable Enterprise Content Management, Intelligent capture, Seamless integration, Lifecycle automation, Advanced search, Digital operations, Content platform, Cloud-based centralized repository, Version control, Auditability, Approval workflows, Electronic DMS, Records Management, Content lifecycle management, API integration, Document classification"
             />
             <PageHero
                 title="Enterprise Solutions"
@@ -425,7 +425,7 @@ export const Industries = () => {
             <SEO
                 title="Industry-Specific ECM Solutions – BFSI, Govt, Judiciary, Healthcare | VSDOX"
                 description="VSDOX delivers tailored document management solutions for Banking & BFSI, Government, Judiciary, Healthcare, Corporate, and Education sectors across India."
-                keywords="industry DMS solutions, BFSI document management, government ECM, judiciary DMS, healthcare records management India"
+                keywords="industry DMS solutions, BFSI document management, government ECM, judiciary DMS, healthcare records management India, DMS, Document Management System, ECM, Enterprise Content Management System, AI-powered document management, Secure ECM, Scalable Enterprise Content Management, Intelligent capture, Seamless integration, Lifecycle automation, Advanced search, Digital operations, Content platform, Cloud-based centralized repository, Version control, Auditability, Approval workflows, Electronic DMS, Records Management, Content lifecycle management, API integration, Document classification"
             />
             <PageHero
                 title="Industry-Specific Solutions"
@@ -601,7 +601,7 @@ export const Contact = () => {
             <SEO
                 title="Contact Us – Reach VSDOX & Vir Softech ECM Experts | India"
                 description="Contact Vir Softech for VSDOX enterprise content management inquiries. Corporate office in Noida, India. International offices in Japan & USA. Email, phone & WhatsApp available."
-                keywords="contact VSDOX, Vir Softech contact, ECM support India, document management inquiry, DMS sales contact"
+                keywords="contact VSDOX, Vir Softech contact, ECM support India, document management inquiry, DMS sales contact, DMS, Document Management System, ECM, Enterprise Content Management System, AI-powered document management, Secure ECM, Scalable Enterprise Content Management, Intelligent capture, Seamless integration, Lifecycle automation, Advanced search, Digital operations, Content platform, Cloud-based centralized repository, Version control, Auditability, Approval workflows, Electronic DMS, Workflow automation, Records Management, Content lifecycle management, API integration, Document classification"
             />
             <PageHero
                 title="Contact Us"
@@ -767,7 +767,7 @@ export const About = () => {
             <SEO
                 title="About Vir Softech – India's Leading ECM & DMS Technology Company"
                 description="Vir Softech Pvt. Ltd. is an ISO 9001:2015 certified, CMMI Level 3 company delivering AI-powered document management solutions to 500+ clients globally since 1995."
-                keywords="Vir Softech, about VSDOX, ECM company India, DMS provider, ISO certified document management, CMMI Level 3"
+                keywords="Vir Softech, about VSDOX, ECM company India, DMS provider, ISO certified document management, CMMI Level 3, DMS, Document Management System, ECM, Enterprise Content Management System, AI-powered document management, Secure ECM, Scalable Enterprise Content Management, Intelligent capture, Seamless integration, Lifecycle automation, Advanced search, Digital operations, Content platform, Cloud-based centralized repository, Version control, Auditability, Approval workflows, Electronic DMS, Records Management, Content lifecycle management, API integration, Document classification"
             />
             <PageHero
                 title="About Vir Softech"

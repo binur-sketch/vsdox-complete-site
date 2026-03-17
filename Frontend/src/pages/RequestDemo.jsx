@@ -82,7 +82,7 @@ const RequestDemo = () => {
             <SEO
                 title="Request a Free VSDOX Demo – See AI-Powered ECM Live"
                 description="Book a personalized, live demo of VSDOX Enterprise Content Management. See AI document classification, workflow automation, and intelligent search tailored to your industry."
-                keywords="VSDOX demo, ECM demo India, document management demo, DMS product demo, request demo AI document management"
+                keywords="VSDOX demo, ECM demo India, document management demo, DMS product demo, request demo AI document management, DMS, Document Management System, ECM, Enterprise Content Management System, AI-powered document management, Secure ECM, Scalable Enterprise Content Management, Intelligent capture, Seamless integration, Lifecycle automation, Advanced search, Digital operations, Content platform, Cloud-based centralized repository, Version control, Auditability, Approval workflows, Electronic DMS, Workflow automation, Records Management, Content lifecycle management, API integration, Document classification"
             />
             {/* Hero */}
             <section style={{

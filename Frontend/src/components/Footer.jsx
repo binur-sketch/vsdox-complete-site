@@ -11,7 +11,7 @@ const Footer = () => {
                     {/* Brand Column */}
                     <div className="footer-brand">
                         <Link to="/" className="footer-logo">
-                            <img src={logo} alt="VsDox" />
+                            <img src={logo} alt="VSDOX – AI-Powered Enterprise Content Management by Vir Softech" />
                         </Link>
                         <p className="footer-tagline">
                             Empowering organizations with AI-driven Enterprise Content Management solutions. Move your document databases online with confidence.
